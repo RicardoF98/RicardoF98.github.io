@@ -94,13 +94,17 @@
       font-style: italic;
     }
 
-    input, select {
+    input, select, textarea {
       padding: 0.5rem;
       font-size: 1rem;
       margin-top: 0.25rem;
       width: 100%;
       border-radius: 10px;
       border: none;
+    }
+
+    textarea {
+      resize: vertical;
     }
 
     @media (max-width: 480px) {
@@ -130,7 +134,7 @@
     <p class="info">PULSAR EL BOTÓN PARA DESBLOQUEAR SU CONTENIDO</p>
   </div>
 
-  <!-- CARD 2: Cuenta regresiva y detalles -->
+  <!-- CARD 2: Detalles -->
   <div class="card hidden" id="card-detalles">
     <img src="https://cdn-icons-png.flaticon.com/512/7743/7743300.png" class="animal left" alt="elefante" />
     <img src="https://cdn-icons-png.flaticon.com/512/848/848579.png" class="animal right" alt="jirafa" />
@@ -148,6 +152,7 @@
     <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" class="animal left" alt="koala" />
     <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="animal right" alt="mono" />
     <div class="title">Confirmar Asistencia</div>
+
     <label class="label" for="nombre">Nombre:</label>
     <input type="text" id="nombre" />
 
@@ -166,11 +171,14 @@
       </select>
     </div>
 
+    <label class="label" for="comentario">Comentario especial para la mamá 💖</label>
+    <textarea id="comentario" rows="3"></textarea>
+
     <p style="text-align:center;margin-top:1rem;"><strong>Evento SOLO PARA MUJERES</strong></p>
     <button onclick="enviarWhatsapp()">Enviar por WhatsApp</button>
   </div>
 
-  <!-- CARD 4: Comentarios -->
+  <!-- Comentarios -->
   <div class="card" id="comentarios">
     <div class="title">Comentarios de los invitados 💬</div>
     <div id="lista-comentarios"></div>
@@ -178,12 +186,11 @@
 
   <audio id="musica" src="assets/musica.mp3"></audio>
 
-  <!-- Firebase Scripts -->
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyARCWm0H736mobcpIQeRiVqa_LT0Yso0Mg",
@@ -192,9 +199,9 @@
       projectId: "babyernestoleon",
       storageBucket: "babyernestoleon.appspot.com",
       messagingSenderId: "470717032691",
-      appId: "1:470717032691:web:4b46f108925e14d24f6f86",
-      measurementId: "G-KKCBPM82PR"
+      appId: "1:470717032691:web:4b46f108925e14d24f6f86"
     };
+
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
   </script>
@@ -221,6 +228,7 @@
       const nombre = document.getElementById('nombre').value.trim();
       const asistire = document.getElementById('asistire').value;
       const numPersonas = document.getElementById('num-personas').value;
+      const comentario = document.getElementById('comentario').value.trim();
       let mensaje = '';
 
       if (!nombre || !asistire) {
@@ -233,8 +241,6 @@
       } else {
         mensaje = `Hola, soy ${nombre}. Mil disculpas, no podré asistir al baby shower de León Ernesto.`;
       }
-
-      const comentario = prompt("¿Quieres dejar un comentario especial para la mamá? ❤️") || "";
 
       db.ref("asistencias").push({
         nombre,
@@ -250,32 +256,53 @@
 
     function abrirCalendario() {
       const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      const link = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Baby+Shower+León+Ernesto&dates=20250830T230000Z/20250831T010000Z&details=Hotel+Hotsson+Tampico&location=Av.+Miguel+Hidalgo+2000,+Smith,+Tampico';
       if (isIOS) {
-        window.location.href = 'webcal://calendar.google.com/calendar/render?action=TEMPLATE&text=Baby+Shower+León+Ernesto&dates=20250830T230000Z/20250831T010000Z&details=Hotel+Hotsson+Tampico&location=Av.+Miguel+Hidalgo+2000,+Smith,+Tampico';
+        window.location.href = 'webcal://' + link.replace(/^https?:\/\//, '');
       } else {
-        window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Baby+Shower+León+Ernesto&dates=20250830T230000Z/20250831T010000Z&details=Hotel+Hotsson+Tampico&location=Av.+Miguel+Hidalgo+2000,+Smith,+Tampico', '_blank');
+        window.open(link, '_blank');
       }
     }
 
-    // Mostrar comentarios
-    const lista = document.getElementById("lista-comentarios");
-    db.ref("asistencias").on("value", (snapshot) => {
+    function countdown() {
+      const targetDate = new Date("2025-08-30T17:00:00");
+      const el = document.getElementById("countdown");
+
+      function update() {
+        const now = new Date();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+          el.innerText = "¡Es hoy! 🎉";
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const mins = Math.floor((diff / (1000 * 60)) % 60);
+
+        el.innerText = `${days} días, ${hours} hrs, ${mins} min`;
+        requestAnimationFrame(update);
+      }
+
+      update();
+    }
+
+    countdown();
+
+    // Mostrar comentarios guardados
+    firebase.database().ref("asistencias").on("value", (snapshot) => {
+      const lista = document.getElementById("lista-comentarios");
       lista.innerHTML = "";
-      snapshot.forEach((child) => {
+      snapshot.forEach(child => {
         const data = child.val();
         if (data.comentario && data.comentario.trim() !== "") {
           const div = document.createElement("div");
-          div.style.marginBottom = "1rem";
-          div.innerHTML = `
-            <p style="margin: 0;"><strong>${data.nombre}:</strong></p>
-            <p style="margin: 0.25rem 0 0.5rem 0;">${data.comentario}</p>
-            <hr style="border: 0; border-top: 1px dashed #ffd166;">
-          `;
+          div.innerHTML = `<p><strong>${data.nombre}</strong>: ${data.comentario}</p>`;
           lista.appendChild(div);
         }
       });
     });
   </script>
-
 </body>
 </html>
