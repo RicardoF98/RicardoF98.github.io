@@ -3,168 +3,185 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Baby Shower - León Ernesto</title>
+  <title>Invitación Baby Shower León Ernesto</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
       font-family: 'Fredoka', sans-serif;
       background: url('assets/selva.jpg') no-repeat center center fixed;
       background-size: cover;
-      color: #2d2d2d;
       overflow-x: hidden;
     }
-    .container {
-      padding: 1rem;
-      max-width: 600px;
-      margin: auto;
+    * {
+      box-sizing: border-box;
     }
-    header {
-      text-align: center;
-      padding: 4rem 1rem 2rem;
-      background-color: rgba(255, 255, 255, 0.85);
+
+    .contenedor {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 1rem;
+      background-color: rgba(255, 255, 255, 0.9);
       border-radius: 20px;
+      margin-top: 2rem;
       position: relative;
     }
+
     h1 {
       font-size: 2.5rem;
       color: #2e7d32;
+      text-align: center;
+      margin-top: 2rem;
     }
-    .subtext {
-      font-size: 1.3rem;
-      margin: 1rem 0;
+
+    .subtitulo {
+      font-size: 1.6rem;
+      text-align: center;
+      margin: 1rem 0 2rem;
     }
+
     .btn {
+      display: block;
+      margin: 1rem auto;
       padding: 1rem 2rem;
-      border-radius: 15px;
       font-size: 1.2rem;
-      background: #66bb6a;
+      border-radius: 10px;
+      background-color: #66bb6a;
+      color: white;
       border: none;
       cursor: pointer;
-      color: white;
-      font-weight: bold;
-      margin: 1rem auto;
-      display: block;
-      max-width: 90%;
+      transition: transform 0.2s ease-in-out;
     }
-    .card {
-      background-color: rgba(255, 255, 255, 0.95);
-      padding: 2rem;
-      border-radius: 20px;
-      margin: 2rem 0;
+
+    .btn:hover {
+      transform: scale(1.05);
     }
-    #contenido, #asistenciaCard {
-      display: none;
-    }
-    .countdown {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #1b5e20;
-      margin: 1rem 0;
-    }
-    .formulario label {
-      display: block;
-      margin-top: 1rem;
-      font-size: 1.1rem;
-    }
-    .formulario input, .formulario select {
-      width: 100%;
-      padding: 0.7rem;
-      margin-top: 0.5rem;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-    .leyenda {
-      text-align: center;
-      font-size: 1rem;
-      margin-top: 1rem;
-      color: #004d40;
-      font-weight: bold;
-    }
+
     .monito {
       width: 60px;
       position: absolute;
-      top: -10px;
-      animation: columpiar 2s infinite alternate ease-in-out;
-      z-index: 10;
-    }
-    .monito.left {
-      left: -20px;
-    }
-    .monito.right {
-      right: -20px;
-    }
-    @keyframes columpiar {
-      0% { transform: rotate(-10deg); }
-      100% { transform: rotate(10deg); }
+      animation: columpiar 2s ease-in-out infinite alternate;
     }
 
-    @media (max-width: 480px) {
+    .monito.izquierda {
+      top: -30px;
+      left: -20px;
+    }
+
+    .monito.derecha {
+      top: -30px;
+      right: -20px;
+      transform: scaleX(-1);
+    }
+
+    @keyframes columpiar {
+      0% { transform: translateY(0) rotate(-5deg); }
+      100% { transform: translateY(10px) rotate(5deg); }
+    }
+
+    .card {
+      background-color: #ffffffee;
+      border-radius: 15px;
+      padding: 1rem;
+      margin: 2rem 0;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    .countdown {
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-align: center;
+      color: #1b5e20;
+    }
+
+    label, select, input {
+      display: block;
+      width: 100%;
+      font-size: 1rem;
+      margin-top: 1rem;
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .leyenda {
+      font-size: 1rem;
+      text-align: center;
+      margin-top: 1rem;
+      color: #2e7d32;
+      font-weight: bold;
+    }
+
+    .flecha-abajo {
+      display: block;
+      margin: 1rem auto 0;
+      font-size: 2rem;
+      animation: salto 1s infinite;
+      text-align: center;
+    }
+
+    @keyframes salto {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
+
+    @media screen and (max-width: 480px) {
       h1 {
         font-size: 1.8rem;
-      }
-      .btn {
-        font-size: 1rem;
       }
       .countdown {
         font-size: 1.2rem;
       }
-      .formulario label, .formulario input, .formulario select {
+      .btn {
         font-size: 1rem;
-      }
-      .monito {
-        width: 50px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="monito left" alt="monito">
-      <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="monito right" alt="monito">
-      <h1>Baby Shower de León Ernesto</h1>
-      <p class="subtext">Acompáñame a celebrar con mi mamá<br>Estefany Johany de la Cruz Martínez</p>
-      <button class="btn" onclick="mostrarInvitacion()">Desbloquear Invitación</button>
-      <button class="btn" onclick="mostrarAsistencia()">Desbloquear Asistencia</button>
-      <p class="leyenda">PULSAR AMBOS BOTONES PARA DESBLOQUEAR SU CONTENIDO</p>
-    </header>
+  <div class="contenedor">
+    <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="monito izquierda" alt="monito"/>
+    <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="monito derecha" alt="monito"/>
 
-    <div class="card" id="contenido">
-      <h2>FALTAN...</h2>
-      <div class="countdown" id="countdown">Cargando cuenta regresiva...</div>
-      <p><strong>Fecha:</strong> 30 de agosto 2025, 5:00 PM</p>
-      <p><strong>Lugar:</strong> Hotel Hotsson Tampico, Av. Miguel Hidalgo 2000, Smith, 89140 Tampico, Tamps.</p>
-      <p><strong>Mesa de Regalos Liverpool:</strong> <img src="https://cdn-icons-png.flaticon.com/512/107/107831.png" alt="Regalo" width="20"> 51680690</p>
-      <p><em>“El amor más puro está por llegar. Gracias por ser parte de este momento tan especial.”</em></p>
+    <h1>Baby Shower de León Ernesto</h1>
+    <p class="subtitulo">Acompáñame a celebrar con mi mamá<br><strong>Estefany Johany de la Cruz Martínez</strong></p>
+
+    <button class="btn" onclick="mostrarCuenta()">Desbloquear invitación</button>
+    <button class="btn" onclick="mostrarFormulario()">Desbloquear asistencia</button>
+    <p class="leyenda">PULSAR AMBOS BOTONES PARA DESBLOQUEAR SU CONTENIDO</p>
+    <div class="flecha-abajo">⬇️</div>
+
+    <div id="cardCuenta" class="card" style="display:none">
+      <h3 style="text-align:center;">FALTAN...</h3>
+      <div id="countdown" class="countdown">Cargando cuenta regresiva...</div>
+      <p style="text-align:center;margin-top:1rem;"><strong>Fecha:</strong> 30 de agosto 2025, 5:00 PM</p>
+      <p style="text-align:center;"><strong>Lugar:</strong> Hotel Hotsson Tampico, Av. Miguel Hidalgo 2000</p>
+      <p style="text-align:center;"><strong>Mesa de Regalos Liverpool:</strong> <span style="color:#2e7d32;">51680690</span> 🎁</p>
     </div>
 
-    <div class="card" id="asistenciaCard">
-      <h2>Confirmar Asistencia</h2>
-      <form class="formulario">
-        <label>Tu nombre:</label>
-        <input type="text" id="nombre" placeholder="Ej. Ana López">
+    <div id="cardAsistencia" class="card" style="display:none">
+      <h3 style="text-align:center;">Confirmar Asistencia</h3>
+      <label>Tu nombre:</label>
+      <input type="text" id="nombre" placeholder="Ej. Ana López">
 
-        <label>¿Asistirás?</label>
-        <select id="asistencia" onchange="toggleAsistencia()">
-          <option value="">Selecciona...</option>
-          <option value="Sí">Sí</option>
-          <option value="No">No</option>
+      <label>¿Asistirás?</label>
+      <select id="asistencia" onchange="toggleAsistencia()">
+        <option value="">Selecciona</option>
+        <option value="Sí">Sí</option>
+        <option value="No">No</option>
+      </select>
+
+      <div id="personasContainer" style="display:none">
+        <label>¿Cuántas personas?</label>
+        <select id="personas">
+          <option value="1">1 persona</option>
+          <option value="2">2 personas</option>
         </select>
+      </div>
 
-        <div id="personasContainer" style="display:none">
-          <label>¿Cuántas personas?</label>
-          <select id="personas">
-            <option value="1">1 persona</option>
-            <option value="2">2 personas</option>
-          </select>
-          <p style="color: #b71c1c;"><strong>Evento SOLO PARA MUJERES</strong></p>
-        </div>
+      <p style="text-align:center;font-size:0.9rem;color:#d32f2f;"><strong>EVENTO SOLO PARA MUJERES</strong></p>
 
-        <button type="button" class="btn" onclick="enviarWhatsApp()">Confirmar por WhatsApp</button>
-      </form>
+      <button class="btn" onclick="enviarWhatsApp()">Confirmar por WhatsApp</button>
     </div>
   </div>
 
@@ -172,19 +189,24 @@
 
   <script>
     const fechaEvento = new Date("August 30, 2025 17:00:00").getTime();
-    let musicaReproducida = false;
+    let audioReproducido = false;
 
-    function mostrarInvitacion() {
-      document.getElementById("contenido").style.display = "block";
-      if (!musicaReproducida) {
+    function mostrarCuenta() {
+      document.getElementById("cardCuenta").style.display = "block";
+      if (!audioReproducido) {
         document.getElementById("musicaFondo").play().catch(()=>{});
-        musicaReproducida = true;
+        audioReproducido = true;
       }
       iniciarCountdown();
     }
 
-    function mostrarAsistencia() {
-      document.getElementById("asistenciaCard").style.display = "block";
+    function mostrarFormulario() {
+      document.getElementById("cardAsistencia").style.display = "block";
+    }
+
+    function toggleAsistencia() {
+      const val = document.getElementById("asistencia").value;
+      document.getElementById("personasContainer").style.display = val === "Sí" ? "block" : "none";
     }
 
     function iniciarCountdown() {
@@ -204,24 +226,25 @@
       }, 1000);
     }
 
-    function toggleAsistencia() {
-      const val = document.getElementById("asistencia").value;
-      document.getElementById("personasContainer").style.display = val === "Sí" ? "block" : "none";
-    }
-
     function enviarWhatsApp() {
       const nombre = document.getElementById("nombre").value.trim();
       const asistencia = document.getElementById("asistencia").value;
       const personas = document.getElementById("personas").value;
-      if (!nombre || !asistencia) return alert("Por favor completa tu nombre y respuesta de asistencia.");
+
+      if (!nombre || asistencia === "") {
+        alert("Por favor completa todos los campos.");
+        return;
+      }
 
       let mensaje = "";
+
       if (asistencia === "Sí") {
-        mensaje = `Hola, soy ${nombre} y confirmo mi asistencia al baby shower de León Ernesto. `;
-        mensaje += personas === "1" ? "Asistiré solo una persona." : "Asistiremos dos personas.";
+        mensaje = `Hola, mi nombre es ${nombre} y confirmo mi asistencia al baby shower de León Ernesto. `;
+        mensaje += personas === "1" ? "Asistirá una persona." : "Asistiremos dos personas.";
       } else {
-        mensaje = `Hola, soy ${nombre} y mil disculpas, no podré asistir al baby shower de León Ernesto.`;
+        mensaje = `Hola, mi nombre es ${nombre}. Mil disculpas, no podré asistir al baby shower de León Ernesto.`;
       }
+
       window.open(`https://wa.me/5218332451478?text=${encodeURIComponent(mensaje)}`);
     }
   </script>
