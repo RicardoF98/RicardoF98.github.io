@@ -206,20 +206,20 @@
       window.open(url, '_blank');
     }
 
-    function countdown() {
-      const target = new Date("2025-08-30T17:00:00").getTime();
-      const countdownEl = document.getElementById("countdown");
-
+function countdown() {
+      const el = document.getElementById("countdown");
       setInterval(() => {
-        const now = new Date().getTime();
-        const distance = target - now;
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        if (days >= 0) {
-          countdownEl.innerText = `${days} días`;
-        } else {
-          countdownEl.innerText = "¡Hoy es el gran día!";
+        const ahora = new Date().getTime();
+        const diff = fechaEvento - ahora;
+        if (diff < 0) {
+          el.textContent = "¡El evento ha comenzado!";
+          return;
         }
+        const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((diff % (1000 * 60)) / 1000);
+        el.textContent = `${dias} días ${horas}h ${minutos}m ${segundos}s`;
       }, 1000);
     }
 
