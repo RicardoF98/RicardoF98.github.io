@@ -7,7 +7,7 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-image: url('assets/selva.jpg'); /* Asegúrate de tener esta imagen en assets */
+      background-image: url('assets/selva.jpg'); /* Asegúrate que este archivo exista */
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -21,11 +21,6 @@
       padding: 30px;
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
       text-align: center;
-    }
-
-    .fondo-selva {
-      margin: 40px auto;
-      padding: 20px;
     }
 
     h1 {
@@ -84,6 +79,15 @@
     .mesa-regalos span {
       font-weight: bold;
     }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 1em;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
   </style>
 </head>
 <body>
@@ -92,46 +96,42 @@
   <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="monito izquierda">
   <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="monito derecha">
 
-  <!-- Botón para desbloquear -->
+  <!-- Botón para desbloquear invitación -->
   <div style="text-align:center;">
     <button class="boton-desbloquear" onclick="document.getElementById('invitacion').style.display='block'; this.style.display='none';">✨ Desbloquear Invitación ✨</button>
   </div>
 
-  <!-- Card principal de la invitación -->
-  <div class="fondo-selva" id="invitacion" style="display:none;">
-    <div class="contenedor">
-      <h1>Baby Shower de León Ernesto</h1>
-      <p class="frase">Acompáñame a celebrar con mi mamá<br><strong>Estefany Johany de la Cruz Martínez</strong></p>
+  <!-- Card de la invitación -->
+  <div id="invitacion" class="contenedor" style="display:none;">
+    <h1>Baby Shower de León Ernesto</h1>
+    <p class="frase">Acompáñame a celebrar con mi mamá<br><strong>Estefany Johany de la Cruz Martínez</strong></p>
 
-      <p style="margin-top: 25px;">FALTAN PARA EL GRAN EVENTO:</p>
-      <div class="contador" id="contador"></div>
+    <p style="margin-top: 25px;">FALTAN PARA EL GRAN EVENTO:</p>
+    <div class="contador" id="contador"></div>
 
-      <p><strong>Fecha:</strong> 30 de agosto 2025, 5:00 PM</p>
-      <p><strong>Lugar:</strong> Hotel Hotsson Tampico, Av. Miguel Hidalgo 2000, Smith, 89140 Tampico, Tamps.</p>
+    <p><strong>Fecha:</strong> 30 de agosto 2025, 5:00 PM</p>
+    <p><strong>Lugar:</strong> Hotel Hotsson Tampico, Av. Miguel Hidalgo 2000, Smith, 89140 Tampico, Tamps.</p>
 
-      <div class="mesa-regalos">
-        <p>🎁 <span>Mesa de regalos Liverpool:</span> 51680690</p>
-      </div>
+    <div class="mesa-regalos">
+      <p>🎁 <span>Mesa de regalos Liverpool:</span> 51680690</p>
     </div>
   </div>
 
-  <!-- Segundo botón para desbloquear asistencia -->
-  <div style="text-align:center;">
+  <!-- Botón para asistencia -->
+  <div style="text-align:center;" id="btn-asistencia">
     <button class="boton-desbloquear" onclick="mostrarAsistencia()">📩 Desbloquear Asistencia</button>
   </div>
 
-  <!-- Card de confirmación de asistencia -->
-  <div class="fondo-selva" id="asistencia" style="display:none;">
-    <div class="contenedor">
-      <h1>Confirmar Asistencia</h1>
-      <p class="frase">¿Nos acompañarás en esta celebración tan especial? ¡Confirma tu asistencia aquí!</p>
+  <!-- Card de confirmación -->
+  <div id="asistencia" class="contenedor" style="display:none;">
+    <h1>Confirmar Asistencia</h1>
+    <p class="frase">¿Nos acompañarás en esta celebración tan especial? ¡Confirma tu asistencia aquí!</p>
 
-      <form id="formAsistencia" onsubmit="return enviarWhatsApp();">
-        <input type="text" id="nombre" placeholder="Tu nombre" required style="width: 100%; padding: 12px; font-size: 1em; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc;">
-        <input type="text" id="invitados" placeholder="¿Con cuántas personas asistirás?" required style="width: 100%; padding: 12px; font-size: 1em; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc;">
-        <button type="submit" class="boton-desbloquear" style="margin-top: 20px;">Confirmar vía WhatsApp</button>
-      </form>
-    </div>
+    <form id="formAsistencia" onsubmit="return enviarWhatsApp();">
+      <input type="text" id="nombre" placeholder="Tu nombre" required>
+      <input type="text" id="invitados" placeholder="¿Con cuántas personas asistirás?" required>
+      <button type="submit" class="boton-desbloquear" style="margin-top: 20px;">Confirmar vía WhatsApp</button>
+    </form>
   </div>
 
   <script>
@@ -151,17 +151,18 @@
       contadorEl.innerHTML = `${dias} días ${horas}h ${minutos}m ${segundos}s`;
     }, 1000);
 
-    // Mostrar card de asistencia
+    // Mostrar asistencia
     function mostrarAsistencia() {
       document.getElementById('asistencia').style.display = 'block';
+      document.getElementById('btn-asistencia').style.display = 'none';
     }
 
-    // Enviar mensaje a WhatsApp
+    // Enviar WhatsApp
     function enviarWhatsApp() {
       const nombre = document.getElementById('nombre').value.trim();
       const invitados = document.getElementById('invitados').value.trim();
       const mensaje = `¡Hola! Confirmo mi asistencia al Baby Shower de León Ernesto. Mi nombre es ${nombre} y asistiré con ${invitados} personas.`;
-      const numeroWhatsApp = "8332451478"; // ← pon aquí el número real sin espacios
+      const numeroWhatsApp = "8332451478";
 
       const url = `https://wa.me/52${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, '_blank');
