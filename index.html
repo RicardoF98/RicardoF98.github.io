@@ -170,7 +170,34 @@
     <button onclick="enviarWhatsapp()">Enviar por WhatsApp</button>
   </div>
 
+  <!-- CARD 4: Comentarios -->
+  <div class="card" id="comentarios">
+    <div class="title">Comentarios de los invitados 💬</div>
+    <div id="lista-comentarios"></div>
+  </div>
+
   <audio id="musica" src="assets/musica.mp3"></audio>
+
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyARCWm0H736mobcpIQeRiVqa_LT0Yso0Mg",
+      authDomain: "babyernestoleon.firebaseapp.com",
+      databaseURL: "https://babyernestoleon-default-rtdb.firebaseio.com",
+      projectId: "babyernestoleon",
+      storageBucket: "babyernestoleon.appspot.com",
+      messagingSenderId: "470717032691",
+      appId: "1:470717032691:web:4b46f108925e14d24f6f86",
+      measurementId: "G-KKCBPM82PR"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+  </script>
 
   <script>
     const btnDesbloquear = document.getElementById('btn-desbloquear');
@@ -196,31 +223,29 @@
       const numPersonas = document.getElementById('num-personas').value;
       let mensaje = '';
 
+      if (!nombre || !asistire) {
+        alert("Por favor completa tu nombre y si asistirás.");
+        return;
+      }
+
       if (asistire === 'si') {
-        mensaje = `Hola, mi nombre es ${nombre} y asistiré al baby shower de León Ernesto. Seré ${numPersonas} persona(s).`;
-      } else if (asistire === 'no') {
+        mensaje = `Hola, mi nombre es ${nombre} y asistiré al baby shower de León Ernesto. Será ${numPersonas} persona(s).`;
+      } else {
         mensaje = `Hola, soy ${nombre}. Mil disculpas, no podré asistir al baby shower de León Ernesto.`;
       }
 
+      const comentario = prompt("¿Quieres dejar un comentario especial para la mamá? ❤️") || "";
+
+      db.ref("asistencias").push({
+        nombre,
+        asistire,
+        numPersonas: asistire === 'si' ? numPersonas : 0,
+        comentario,
+        fecha: new Date().toISOString()
+      });
+
       const url = `https://wa.me/5218332451478?text=${encodeURIComponent(mensaje)}`;
       window.open(url, '_blank');
-    }
-  const fechaEvento = new Date("August 30, 2025 17:00:00").getTime();
-function countdown() {
-      const el = document.getElementById("countdown");
-      setInterval(() => {
-        const ahora = new Date().getTime();
-        const diff = fechaEvento - ahora;
-        if (diff < 0) {
-          el.textContent = "¡El evento ha comenzado!";
-          return;
-        }
-        const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const segundos = Math.floor((diff % (1000 * 60)) / 1000);
-        el.textContent = `${dias} días ${horas}h ${minutos}m ${segundos}s`;
-      }, 1000);
     }
 
     function abrirCalendario() {
@@ -232,7 +257,25 @@ function countdown() {
       }
     }
 
-    countdown();
+    // Mostrar comentarios
+    const lista = document.getElementById("lista-comentarios");
+    db.ref("asistencias").on("value", (snapshot) => {
+      lista.innerHTML = "";
+      snapshot.forEach((child) => {
+        const data = child.val();
+        if (data.comentario && data.comentario.trim() !== "") {
+          const div = document.createElement("div");
+          div.style.marginBottom = "1rem";
+          div.innerHTML = `
+            <p style="margin: 0;"><strong>${data.nombre}:</strong></p>
+            <p style="margin: 0.25rem 0 0.5rem 0;">${data.comentario}</p>
+            <hr style="border: 0; border-top: 1px dashed #ffd166;">
+          `;
+          lista.appendChild(div);
+        }
+      });
+    });
   </script>
+
 </body>
 </html>
