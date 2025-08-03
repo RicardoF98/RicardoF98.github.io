@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Baby Shower León Ernesto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Parisienne', cursive;
+      background: #fffaf5;
+      color: #333;
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2.8rem;
+      color: #c77dbb;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+    .formulario {
+      margin-top: 2rem;
+    }
+    input, select {
+      padding: 0.6rem;
+      width: 80%;
+      margin: 0.5rem auto;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 0.8rem 1.5rem;
+      background: #f9c5d1;
+      border: none;
+      border-radius: 20px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    iframe {
+      margin-top: 2rem;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Baby Shower de León Ernesto</h1>
+  <p>Estás cordialmente invitado a celebrar con nosotros</p>
+  <p><strong>Estefany Johany de la Cruz Martínez</strong></p>
+  <p>📍 Hotel Hotsson Tampico<br>📅 30 de agosto 2025, 5:00 PM</p>
+  <p><em>"Sabemos que muchos abrazos llenos de amor nos esperan.<br>¡No queremos que falten los tuyos!"</em></p>
+
+  <div class="formulario">
+    <input type="text" id="nombre" placeholder="Tu nombre" required />
+    <select id="asistencia">
+      <option value="Sí">Sí asistiré</option>
+      <option value="No">No podré asistir</option>
+    </select>
+    <select id="personas">
+      <option value="1">1 persona</option>
+      <option value="2">2 personas</option>
+    </select>
+    <button onclick="enviarWhatsApp()">Confirmar por WhatsApp</button>
+  </div>
+
+  <iframe width="0" height="0" src="https://www.youtube.com/embed/KTIs5cki_cA?autoplay=1&loop=1&playlist=KTIs5cki_cA" allow="autoplay"></iframe>
+
+  <script>
+    function enviarWhatsApp() {
+      const nombre = document.getElementById('nombre').value.trim();
+      const asistencia = document.getElementById('asistencia').value;
+      const personas = document.getElementById('personas').value;
+      
+      if (!nombre) {
+        alert("Por favor, escribe tu nombre.");
+        return;
+      }
+
+      const mensaje = `Hola, soy ${nombre} y quiero confirmar mi asistencia al Baby Shower de León Ernesto. ${asistencia} con ${personas} persona(s).`;
+      const url = `https://wa.me/5218332451478?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>
