@@ -1,88 +1,123 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>Baby Shower León Ernesto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       font-family: 'Fredoka', sans-serif;
-      background: url('assets/selva.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: #2e2e2e;
+      background: #f2f2f2;
+      overflow-x: hidden;
     }
 
-    .container {
-      text-align: center;
-      padding: 50px 20px;
-      background-color: rgba(255, 255, 255, 0.9);
-      margin: 60px auto;
+    .fondo-selva {
+      background: url('assets/selva.jpg') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      padding: 30px 15px;
+      display: none;
+    }
+
+    .contenedor {
       max-width: 800px;
+      margin: 0 auto;
+      background-color: rgba(255,255,255,0.9);
+      padding: 40px 30px;
       border-radius: 20px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.3);
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
       position: relative;
+      text-align: center;
     }
 
     h1 {
-      font-size: 3em;
-      margin-bottom: 0;
       color: #2c7a2c;
+      font-size: 2.5em;
+      margin-bottom: 0;
     }
 
     h2 {
       font-weight: 400;
-      font-size: 1.5em;
       margin-top: 10px;
-      margin-bottom: 20px;
+    }
+
+    .frase {
+      font-size: 1.2em;
+      margin: 25px 0;
+      color: #333;
     }
 
     #countdownTitle {
-      font-size: 1.3em;
-      color: #2e2e2e;
-      margin-top: 30px;
-      font-weight: 500;
+      font-size: 1.2em;
+      margin-top: 25px;
+      font-weight: bold;
     }
 
     #countdown {
       font-size: 2em;
       font-weight: bold;
       color: #2c7a2c;
-      margin: 15px 0;
-    }
-
-    .monkey {
-      position: absolute;
-      width: 80px;
-      z-index: 99;
-    }
-
-    .monkey.left {
-      top: 10px;
-      left: 10px;
-      animation: swing 2.5s infinite ease-in-out;
-    }
-
-    .monkey.right {
-      top: 10px;
-      right: 10px;
-      animation: swing 2.5s infinite ease-in-out alternate;
-    }
-
-    @keyframes swing {
-      0% { transform: rotate(5deg) translateY(0px); }
-      50% { transform: rotate(-5deg) translateY(5px); }
-      100% { transform: rotate(5deg) translateY(0px); }
+      margin: 10px 0 20px;
     }
 
     .info {
       font-size: 1.1em;
-      margin-top: 20px;
+      margin-top: 15px;
     }
 
     .info b {
-      color: #222;
+      color: #000;
+    }
+
+    .boton-desbloquear {
+      display: block;
+      margin: 100px auto;
+      padding: 20px 30px;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #fff;
+      background-color: #2c7a2c;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      animation: pulse 1.5s infinite;
+    }
+
+    .boton-desbloquear:hover {
+      background-color: #1e531e;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .monkey {
+      position: absolute;
+      width: 70px;
+      z-index: 100;
+    }
+
+    .monkey.left {
+      top: -30px;
+      left: -30px;
+      animation: swing 3s infinite ease-in-out;
+    }
+
+    .monkey.right {
+      top: -30px;
+      right: -30px;
+      animation: swing 3s infinite ease-in-out alternate;
+    }
+
+    @keyframes swing {
+      0% { transform: rotate(10deg) translateY(0); }
+      50% { transform: rotate(-10deg) translateY(5px); }
+      100% { transform: rotate(10deg) translateY(0); }
     }
 
     audio {
@@ -92,26 +127,47 @@
 </head>
 <body>
 
-  <!-- Monitos en las esquinas -->
-  <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" alt="Mono" class="monkey left">
-  <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" alt="Mono" class="monkey right">
+  <!-- Botón inicial -->
+  <button class="boton-desbloquear" onclick="mostrarInvitacion()">✨ Desbloquear Invitación ✨</button>
 
-  <div class="container">
-    <h1>Baby Shower de León Ernesto</h1>
-    <h2>Acompáñame a celebrar con mi mamá<br/>Estefany Johany de la Cruz Martínez</h2>
+  <!-- Invitación con fondo selvático -->
+  <div class="fondo-selva" id="invitacion">
 
-    <div id="countdownTitle">FALTAN PARA EL GRAN EVENTO:</div>
-    <div id="countdown"></div>
+    <!-- Monitos -->
+    <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" alt="Mono" class="monkey left">
+    <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" alt="Mono" class="monkey right">
 
-    <div class="info"><b>Fecha:</b> 30 de agosto 2025, 5:00 PM</div>
-    <div class="info"><b>Lugar:</b> Hotel Hotsson Tampico, Av. Miguel Hidalgo 2000, Smith, 89140 Tampico, Tamps.</div>
+    <div class="contenedor">
+      <h1>Baby Shower de León Ernesto</h1>
+      <h2>Acompáñame a celebrar con mi mamá<br/>Estefany Johany de la Cruz Martínez</h2>
+
+      <div class="frase">“Sé que muchos abrazos me esperan cuando llegue al mundo,<br>¡no quiero que los tuyos falten!”</div>
+
+      <div id="countdownTitle">DÍAS PARA EL GRAN EVENTO</div>
+      <div id="countdown">...</div>
+
+      <div class="info"><b>Fecha:</b> 30 de agosto 2025, 5:00 PM</div>
+      <div class="info"><b>Lugar:</b> Hotel Hotsson Tampico, Av. Miguel Hidalgo 2000, Smith, 89140 Tampico, Tamps.</div>
+    </div>
+
+    <!-- Música -->
+    <audio id="musica" autoplay loop>
+      <source src="assets/musica.mp3" type="audio/mpeg">
+    </audio>
   </div>
 
-  <audio id="musica" autoplay loop>
-    <source src="assets/musica.mp3" type="audio/mpeg">
-  </audio>
-
   <script>
+    function mostrarInvitacion() {
+      document.querySelector('.boton-desbloquear').style.display = 'none';
+      document.getElementById('invitacion').style.display = 'block';
+
+      const audio = document.getElementById('musica');
+      audio.play().catch(e => {
+        console.log("El navegador bloqueó la reproducción automática.");
+      });
+    }
+
+    // Cuenta regresiva
     const countdown = document.getElementById('countdown');
     const fechaEvento = new Date("August 30, 2025 17:00:00").getTime();
 
