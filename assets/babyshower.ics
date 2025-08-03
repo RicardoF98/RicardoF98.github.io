@@ -1,0 +1,10 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+SUMMARY:Baby Shower de León Ernesto
+DESCRIPTION:Te esperamos para celebrar a León Ernesto con Estefany Johany.
+LOCATION:Hotel Hotsson Tampico
+DTSTART;TZID=America/Mexico_City:20250830T170000
+DTEND;TZID=America/Mexico_City:20250830T190000
+END:VEVENT
+END:VCALENDAR
