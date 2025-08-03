@@ -13,6 +13,7 @@
       background-size: cover;
       overflow-x: hidden;
     }
+
     * {
       box-sizing: border-box;
     }
@@ -61,6 +62,7 @@
       width: 60px;
       position: absolute;
       animation: columpiar 2s ease-in-out infinite alternate;
+      z-index: 10;
     }
 
     .monito.izquierda {
@@ -85,6 +87,7 @@
       padding: 1rem;
       margin: 2rem 0;
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      position: relative;
     }
 
     .countdown {
@@ -125,6 +128,23 @@
       50% { transform: translateY(10px); }
     }
 
+    .btn-fecha {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #43a047;
+      color: white;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      font-size: 26px;
+      text-align: center;
+      line-height: 55px;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+
     @media screen and (max-width: 480px) {
       h1 {
         font-size: 1.8rem;
@@ -152,14 +172,18 @@
     <div class="flecha-abajo">⬇️</div>
 
     <div id="cardCuenta" class="card" style="display:none">
+      <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="monito izquierda" alt="monito"/>
+      <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="monito derecha" alt="monito"/>
       <h3 style="text-align:center;">FALTAN...</h3>
       <div id="countdown" class="countdown">Cargando cuenta regresiva...</div>
       <p style="text-align:center;margin-top:1rem;"><strong>Fecha:</strong> 30 de agosto 2025, 5:00 PM</p>
-      <p style="text-align:center;"><strong>Lugar:</strong> Hotel Hotsson Tampico, Av. Miguel Hidalgo 2000</p>
-      <p style="text-align:center;"><strong>Mesa de Regalos Liverpool:</strong> <span style="color:#2e7d32;">51680690</span> 🎁</p>
+      <p style="text-align:center;"><strong>Lugar:</strong> Hotel Hotsson Tampico</p>
+      <p style="text-align:center;"><strong>Mesa de Regalos:</strong> Liverpool 51680690 🎁</p>
     </div>
 
     <div id="cardAsistencia" class="card" style="display:none">
+      <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="monito izquierda" alt="monito"/>
+      <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="monito derecha" alt="monito"/>
       <h3 style="text-align:center;">Confirmar Asistencia</h3>
       <label>Tu nombre:</label>
       <input type="text" id="nombre" placeholder="Ej. Ana López">
@@ -184,6 +208,8 @@
       <button class="btn" onclick="enviarWhatsApp()">Confirmar por WhatsApp</button>
     </div>
   </div>
+
+  <a class="btn-fecha" href="#cardCuenta" title="Ver fecha">📅</a>
 
   <audio id="musicaFondo" src="assets/musica.mp3" type="audio/mpeg"></audio>
 
