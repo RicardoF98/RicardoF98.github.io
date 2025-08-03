@@ -118,6 +118,7 @@
 
   <script>
     const fechaEvento = new Date("August 30, 2025 17:00:00").getTime();
+    let audio;
 
     function mostrarContenido() {
       document.getElementById("contenido").style.display = "block";
@@ -164,10 +165,11 @@
     }
 
     function reproducirMusica() {
-      const audio = new Audio("https://docs.google.com/uc?export=open&id=1FZwuexiEkRPIFeiOQQ6hBwZ8J9ZCM96v");
+      audio = new Audio("https://docs.google.com/uc?export=open&id=1FZwuexiEkRPIFeiOQQ6hBwZ8J9ZCM96v");
       audio.loop = true;
-      audio.play().catch(() => {
-        console.log("El navegador bloqueó la reproducción automática");
+      audio.volume = 0.5;
+      audio.play().catch((err) => {
+        console.warn("El navegador bloqueó la reproducción automática", err);
       });
     }
   </script>
