@@ -2,23 +2,21 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Invitación Baby Shower</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Invitación Baby Shower León Ernesto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       font-family: 'Quicksand', sans-serif;
-      background-image: url('selva.jpg');
+      background: url('assets/selva.jpg') no-repeat center center fixed;
       background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      color: white;
+      color: #fff;
     }
 
     .card {
-      max-width: 90%;
-      margin: 3rem auto;
+      max-width: 500px;
+      margin: 2rem auto;
       background: rgba(0,0,0,0.7);
       padding: 2rem;
       border-radius: 15px;
@@ -27,195 +25,214 @@
     }
 
     .title {
-      font-family: 'Pacifico', cursive;
+      font-family: 'Dancing Script', cursive;
       font-size: 2rem;
       text-align: center;
     }
 
     .animal {
       position: absolute;
-      width: 50px;
+      width: 60px;
       animation: swing 3s ease-in-out infinite;
-      z-index: 2;
+      z-index: 10;
+      pointer-events: none;
     }
 
-    .animal-top-left {
+    .animal.left {
       top: -30px;
       left: -30px;
     }
 
-    .animal-top-right {
+    .animal.right {
       top: -30px;
       right: -30px;
     }
 
-    .btn {
-      display: inline-block;
-      padding: 0.8rem 1.5rem;
-      background-color: #ffd166;
-      color: #000;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 1rem;
-      margin: 1rem 0;
+    @keyframes swing {
+      0% { transform: rotate(5deg); }
+      50% { transform: rotate(-5deg); }
+      100% { transform: rotate(5deg); }
     }
 
-    .legend {
-      font-style: italic;
-      font-size: 0.9rem;
-      text-align: center;
-      margin-top: 1rem;
+    button {
+      display: block;
+      margin: 1rem auto;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      background-color: #ffd166;
+      color: #333;
+      cursor: pointer;
     }
 
     .hidden {
       display: none;
     }
 
-    @keyframes swing {
-      0% { transform: rotate(0deg); }
-      50% { transform: rotate(5deg); }
-      100% { transform: rotate(0deg); }
-    }
-
-    @media screen and (max-width: 480px) {
-      .title { font-size: 1.5rem; }
-      .btn { font-size: 0.9rem; }
-      .animal { width: 40px; }
-    }
-
-    .arrow-down {
-      font-size: 2rem;
+    .countdown {
+      font-size: 1.5rem;
       text-align: center;
-      animation: bounce 2s infinite;
-      cursor: pointer;
+      margin-top: 1rem;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(10px); }
+    .label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
     }
 
+    .select-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .info {
+      margin-top: 1rem;
+      text-align: center;
+      font-style: italic;
+    }
+
+    input, select {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-top: 0.25rem;
+      width: 100%;
+      border-radius: 10px;
+      border: none;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        margin: 1rem;
+        padding: 1rem;
+      }
+      .title {
+        font-size: 1.6rem;
+      }
+      .animal {
+        width: 50px;
+        top: -20px;
+      }
+    }
   </style>
 </head>
 <body>
 
-<!-- Audio -->
-<audio id="bgMusic" src="musica.mp3" preload="auto"></audio>
-
-<!-- CARD: PRESENTACIÓN -->
-<div class="card" id="card-presentacion">
-  <img src="https://cdn-icons-png.flaticon.com/512/1998/1998713.png" class="animal animal-top-left" />
-  <img src="https://cdn-icons-png.flaticon.com/512/7743/7743300.png" class="animal animal-top-right" />
-  
-  <div class="title">Baby Shower León Ernesto</div>
-  <p style="text-align:center;">
-    ¡Acompaña a mi mamá Estefany Johany de la Cruz Martínez en esta celebración tan especial!
-  </p>
-  <div style="text-align:center;">
-    <button class="btn" onclick="desbloquear()">Desbloquear invitación</button>
+  <!-- CARD 1: Presentación -->
+  <div class="card" id="card-presentacion">
+    <img src="https://cdn-icons-png.flaticon.com/512/1998/1998713.png" class="animal left" alt="león" />
+    <img src="https://cdn-icons-png.flaticon.com/512/1998/1998804.png" class="animal right" alt="tigre" />
+    <div class="title">Baby Shower León Ernesto</div>
+    <p style="text-align:center;">¡Acompaña a mi mamá Estefany Johany de la Cruz Martínez en esta celebración tan especial!</p>
+    <button id="btn-desbloquear">Desbloquear invitación</button>
+    <p class="info">PULSAR AMBOS BOTONES PARA DESBLOQUEAR SU CONTENIDO</p>
   </div>
-  <div class="legend">PULSAR AMBOS BOTONES PARA DESBLOQUEAR SU CONTENIDO</div>
-  <div class="arrow-down" onclick="scrollToNext()">⬇</div>
-</div>
 
-<!-- CARD: EVENTO -->
-<div class="card hidden" id="card-evento">
-  <img src="https://cdn-icons-png.flaticon.com/512/848/848579.png" class="animal animal-top-left" />
-  <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" class="animal animal-top-right" />
-  
-  <div class="title">DÍAS PARA EL GRAN EVENTO</div>
-  <h2 style="text-align:center;" id="contador">Cargando...</h2>
-  <p style="text-align:center;"><strong>Fecha:</strong> 30 de agosto 2025, 5:00 PM</p>
-  <p style="text-align:center;"><strong>Lugar:</strong> Hotel Hotsson Tampico, Av. Miguel Hidalgo 2000, Smith, 89140 Tampico, Tamps.</p>
-  <p style="text-align:center;"><strong>Mesa de regalos:</strong> Liverpool (51680690) 🎁</p>
-  <div style="text-align:center; margin-top:1rem;">
-    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Baby+Shower+León+Ernesto&details=Hotel+Hotsson+Tampico,+30+de+agosto+2025,+5:00+PM&dates=20250830T230000Z/20250831T010000Z" target="_blank" class="btn">📅 Agregar al Calendario</a>
+  <!-- CARD 2: Cuenta regresiva y detalles -->
+  <div class="card hidden" id="card-detalles">
+    <img src="https://cdn-icons-png.flaticon.com/512/7743/7743300.png" class="animal left" alt="elefante" />
+    <img src="https://cdn-icons-png.flaticon.com/512/848/848579.png" class="animal right" alt="jirafa" />
+    <div class="title">DÍAS PARA EL GRAN EVENTO</div>
+    <div class="countdown" id="countdown">Cargando...</div>
+    <p style="text-align:center;">📅 30 de agosto 2025 a las 5:00 PM</p>
+    <p style="text-align:center;">📍 Hotel Hotsson Tampico - Av. Miguel Hidalgo 2000, Smith, 89140 Tampico, Tamps.</p>
+    <p class="info">💝 Mesa de regalos Liverpool: <strong>51680690</strong></p>
+    <button onclick="abrirCalendario()">Agregar al Calendario</button>
+    <p class="info">AGREGALO AL CALENDARIO PARA NO PERDERTE DE ESTE GRAN EVENTO</p>
   </div>
-  <div class="legend">AGREGALO AL CALENDARIO PARA NO PERDERTE DE ESTE GRAN EVENTO</div>
-</div>
 
-<!-- CARD: ASISTENCIA -->
-<div class="card hidden" id="card-asistencia">
-  <img src="https://cdn-icons-png.flaticon.com/512/1998/1998804.png" class="animal animal-top-left" />
-  <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="animal animal-top-right" />
-  
-  <div class="title">Confirma tu Asistencia</div>
-  <form onsubmit="enviarWhatsApp(); return false;">
-    <label>Nombre:</label><br>
-    <input type="text" id="nombre" required><br><br>
+  <!-- CARD 3: Confirmación -->
+  <div class="card hidden" id="card-asistencia">
+    <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" class="animal left" alt="koala" />
+    <img src="https://cdn-icons-png.flaticon.com/512/766/766120.png" class="animal right" alt="mono" />
+    <div class="title">Confirmar Asistencia</div>
+    <label class="label" for="nombre">Nombre:</label>
+    <input type="text" id="nombre" />
 
-    <label>¿Asistirás?</label><br>
-    <select id="asistira" required onchange="toggleInvitados()">
+    <label class="label" for="asistire">¿Asistiré?</label>
+    <select id="asistire" onchange="togglePersonas()">
       <option value="">Selecciona</option>
       <option value="si">Sí</option>
       <option value="no">No</option>
-    </select><br><br>
+    </select>
 
-    <div id="invitados" class="hidden">
-      <label>Número de personas:</label><br>
-      <select id="num_personas">
+    <div id="personas-container" class="hidden">
+      <label class="label" for="num-personas">Número de personas:</label>
+      <select id="num-personas">
         <option value="1">1</option>
         <option value="2">2</option>
-      </select><br><br>
+      </select>
     </div>
 
-    <p><strong>Nota:</strong> Evento <u>SOLO PARA MUJERES</u></p>
-    <button type="submit" class="btn">Confirmar por WhatsApp</button>
-  </form>
-</div>
+    <p style="text-align:center;margin-top:1rem;"><strong>Evento SOLO PARA MUJERES</strong></p>
+    <button onclick="enviarWhatsapp()">Enviar por WhatsApp</button>
+  </div>
 
-<script>
-  let musicaReproducida = false;
+  <audio id="musica" src="assets/musica.mp3"></audio>
 
-  function desbloquear() {
-    document.getElementById('card-evento').classList.remove('hidden');
-    document.getElementById('card-asistencia').classList.remove('hidden');
-    if (!musicaReproducida) {
-      document.getElementById('bgMusic').play();
-      musicaReproducida = true;
-    }
-  }
+  <script>
+    const btnDesbloquear = document.getElementById('btn-desbloquear');
+    const cardDetalles = document.getElementById('card-detalles');
+    const cardAsistencia = document.getElementById('card-asistencia');
+    const musica = document.getElementById('musica');
 
-  function scrollToNext() {
-    document.getElementById('card-evento').scrollIntoView({ behavior: 'smooth' });
-  }
+    btnDesbloquear.addEventListener('click', () => {
+      cardDetalles.classList.remove('hidden');
+      cardAsistencia.classList.remove('hidden');
+      musica.play();
+    });
 
-  function toggleInvitados() {
-    const asistira = document.getElementById('asistira').value;
-    const invitadosDiv = document.getElementById('invitados');
-    invitadosDiv.classList.toggle('hidden', asistira !== 'si');
-  }
-
-  function enviarWhatsApp() {
-    const nombre = document.getElementById('nombre').value;
-    const asistira = document.getElementById('asistira').value;
-    const num = document.getElementById('num_personas').value;
-    let mensaje = '';
-
-    if (asistira === 'si') {
-      mensaje = `Hola, mi nombre es ${nombre} y asistiré ${num === '1' ? 'una persona' : 'con otra persona'} al Baby Shower.`;
-    } else {
-      mensaje = `Hola, mi nombre es ${nombre}, no podré asistir. Mil disculpas.`;
+    function togglePersonas() {
+      const asistire = document.getElementById('asistire').value;
+      const container = document.getElementById('personas-container');
+      container.classList.toggle('hidden', asistire !== 'si');
     }
 
-    const telefono = "8332451478";
-    const url = `https://wa.me/52${telefono}?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, "_blank");
-  }
+    function enviarWhatsapp() {
+      const nombre = document.getElementById('nombre').value.trim();
+      const asistire = document.getElementById('asistire').value;
+      const numPersonas = document.getElementById('num-personas').value;
+      let mensaje = '';
 
-  // Cuenta regresiva
-  const fechaEvento = new Date("2025-08-30T17:00:00").getTime();
-  setInterval(() => {
-    const ahora = new Date().getTime();
-    const distancia = fechaEvento - ahora;
-    const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
-    const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+      if (asistire === 'si') {
+        mensaje = `Hola, mi nombre es ${nombre} y asistiré al baby shower de León Ernesto. Seré ${numPersonas} persona(s).`;
+      } else if (asistire === 'no') {
+        mensaje = `Hola, soy ${nombre}. Mil disculpas, no podré asistir al baby shower de León Ernesto.`;
+      }
 
-    document.getElementById("contador").innerText = `${dias} días ${horas}h ${minutos}m ${segundos}s`;
-  }, 1000);
-</script>
+      const url = `https://wa.me/5218332451478?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, '_blank');
+    }
+
+    function countdown() {
+      const target = new Date("2025-08-30T17:00:00").getTime();
+      const countdownEl = document.getElementById("countdown");
+
+      setInterval(() => {
+        const now = new Date().getTime();
+        const distance = target - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        if (days >= 0) {
+          countdownEl.innerText = `${days} días`;
+        } else {
+          countdownEl.innerText = "¡Hoy es el gran día!";
+        }
+      }, 1000);
+    }
+
+    function abrirCalendario() {
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isIOS) {
+        window.location.href = 'webcal://calendar.google.com/calendar/render?action=TEMPLATE&text=Baby+Shower+León+Ernesto&dates=20250830T230000Z/20250831T010000Z&details=Hotel+Hotsson+Tampico&location=Av.+Miguel+Hidalgo+2000,+Smith,+Tampico';
+      } else {
+        window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Baby+Shower+León+Ernesto&dates=20250830T230000Z/20250831T010000Z&details=Hotel+Hotsson+Tampico&location=Av.+Miguel+Hidalgo+2000,+Smith,+Tampico', '_blank');
+      }
+    }
+
+    countdown();
+  </script>
 </body>
 </html>
