@@ -9,7 +9,7 @@
     body {
       margin: 0;
       font-family: 'Fredoka', sans-serif;
-      background: url('https://images.unsplash.com/photo-1565120130288-f9e8b0c9f347?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background: url('assets/selva.jpg') no-repeat center center fixed;
       background-size: cover;
       color: #2e2e2e;
     }
@@ -55,17 +55,18 @@
     .monkey {
       position: absolute;
       width: 80px;
-      top: -40px;
-      z-index: 999;
+      z-index: 99;
     }
 
     .monkey.left {
-      left: -20px;
+      top: 10px;
+      left: 10px;
       animation: swing 2.5s infinite ease-in-out;
     }
 
     .monkey.right {
-      right: -20px;
+      top: 10px;
+      right: 10px;
       animation: swing 2.5s infinite ease-in-out alternate;
     }
 
@@ -91,7 +92,7 @@
 </head>
 <body>
 
-  <!-- Monitos desde Flaticon -->
+  <!-- Monitos en las esquinas -->
   <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" alt="Mono" class="monkey left">
   <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" alt="Mono" class="monkey right">
 
