@@ -7,7 +7,7 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-image: url('assets/selva.jpg'); /* Asegúrate que este archivo exista */
+      background-image: url('assets/selva.jpg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -80,13 +80,19 @@
       font-weight: bold;
     }
 
-    input {
+    input, select {
       width: 100%;
       padding: 12px;
       font-size: 1em;
       margin: 10px 0;
       border-radius: 8px;
       border: 1px solid #ccc;
+    }
+
+    .solo-mujeres {
+      font-size: 1em;
+      color: #c62828;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -98,7 +104,7 @@
 
   <!-- Botón para desbloquear invitación -->
   <div style="text-align:center;">
-    <button class="boton-desbloquear" onclick="document.getElementById('invitacion').style.display='block'; this.style.display='none';">✨ Desbloquear Invitación ✨</button>
+    <button class="boton-desbloquear" onclick="desbloquearInvitacion()">✨ Desbloquear Invitación ✨</button>
   </div>
 
   <!-- Card de la invitación -->
@@ -127,12 +133,21 @@
     <h1>Confirmar Asistencia</h1>
     <p class="frase">¿Nos acompañarás en esta celebración tan especial? ¡Confirma tu asistencia aquí!</p>
 
+    <p class="solo-mujeres">🌸 Evento exclusivo para mujeres 🌸</p>
+
     <form id="formAsistencia" onsubmit="return enviarWhatsApp();">
-      <input type="text" id="nombre" placeholder="Tu nombre" required>
-      <input type="text" id="invitados" placeholder="¿Con cuántas personas asistirás?" required>
+      <input type="text" id="nombre" placeholder="Tu nombre completo" required>
+      <select id="invitados" required>
+        <option value="">¿Con cuántas personas asistirás?</option>
+        <option value="1">1 persona</option>
+        <option value="2">2 personas</option>
+      </select>
       <button type="submit" class="boton-desbloquear" style="margin-top: 20px;">Confirmar vía WhatsApp</button>
     </form>
   </div>
+
+  <!-- Música -->
+  <audio id="audioFondo" src="assets/musica.mp3"></audio>
 
   <script>
     // Cuenta regresiva
@@ -151,17 +166,23 @@
       contadorEl.innerHTML = `${dias} días ${horas}h ${minutos}m ${segundos}s`;
     }, 1000);
 
-    // Mostrar asistencia
+    // Desbloquear invitación y reproducir música
+    function desbloquearInvitacion() {
+      document.getElementById('invitacion').style.display = 'block';
+      event.target.style.display = 'none';
+      const audio = document.getElementById('audioFondo');
+      audio.play().catch(e => console.log("Autoplay bloqueado"));
+    }
+
     function mostrarAsistencia() {
       document.getElementById('asistencia').style.display = 'block';
       document.getElementById('btn-asistencia').style.display = 'none';
     }
 
-    // Enviar WhatsApp
     function enviarWhatsApp() {
       const nombre = document.getElementById('nombre').value.trim();
-      const invitados = document.getElementById('invitados').value.trim();
-      const mensaje = `¡Hola! Confirmo mi asistencia al Baby Shower de León Ernesto. Mi nombre es ${nombre} y asistiré con ${invitados} personas.`;
+      const invitados = document.getElementById('invitados').value;
+      const mensaje = `¡Hola! Confirmo mi asistencia al Baby Shower de León Ernesto. Mi nombre es ${nombre} y asistiré con ${invitados} persona(s).`;
       const numeroWhatsApp = "8332451478";
 
       const url = `https://wa.me/52${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
