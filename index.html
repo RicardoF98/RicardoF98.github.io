@@ -117,6 +117,50 @@
       vertical-align: middle;
       margin-left: 6px;
     }
+    
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3rem;
+  }
+  .subtext, .countdown {
+    font-size: 1.8rem;
+  }
+  .btn-desbloquear, .btn-asistencia {
+    font-size: 1.8rem;
+    padding: 1rem 1.4rem;
+    width: auto;
+  }
+  .card {
+    width: 90%;
+    margin: 1rem auto;
+    padding: 1.5rem;
+  }
+  .formulario input, .formulario select {
+    font-size: 1.6rem;
+    padding: 1rem;
+  }
+  .formulario button {
+    font-size: 1.8rem;
+    padding: 1rem;
+  }
+  .leyenda {
+    font-size: 1.4rem;
+  }
+  .monitos {
+    width: 80px;
+  }
+}
+
+/* Re-add monkey swinging animation */
+.monitos {
+  animation: swing 2s ease-in-out infinite alternate;
+}
+
+@keyframes swing {
+  0% { transform: rotate(-10deg); }
+  100% { transform: rotate(10deg); }
+}
+
   </style>
 </head>
 <body>
