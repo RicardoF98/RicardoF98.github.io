@@ -183,7 +183,10 @@
     </button>
   </div>
 
-  <audio id="musica" src="assets/musica.mp3"></audio>
+  <!-- Audio -->
+  <audio id="musica" preload="auto">
+    <source src="assets/musica.mp3" type="audio/mpeg" />
+  </audio>
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -203,15 +206,17 @@
   </script>
 
   <script>
+    const musica = document.getElementById('musica');
     const btnDesbloquear = document.getElementById('btn-desbloquear');
     const cardDetalles = document.getElementById('card-detalles');
     const cardAsistencia = document.getElementById('card-asistencia');
-    const musica = document.getElementById('musica');
 
     btnDesbloquear.addEventListener('click', () => {
       cardDetalles.classList.remove('hidden');
       cardAsistencia.classList.remove('hidden');
-      musica.play();
+      musica.play().catch(() => {
+        console.log("El navegador bloqueó la reproducción automática.");
+      });
     });
 
     function togglePersonas() {
