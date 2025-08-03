@@ -2,190 +2,171 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Baby Shower León Ernesto</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <title>Baby Shower de León Ernesto</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Fredoka', sans-serif;
-      background: #f2f2f2;
-      overflow-x: hidden;
-    }
-
-    .fondo-selva {
-      background: url('assets/selva.jpg') no-repeat center center fixed;
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('assets/selva.jpg'); /* Asegúrate de tener esta imagen en assets */
       background-size: cover;
-      min-height: 100vh;
-      padding: 30px 15px;
-      display: none;
+      background-position: center;
+      background-attachment: fixed;
     }
 
     .contenedor {
-      max-width: 800px;
-      margin: 0 auto;
-      background-color: rgba(255,255,255,0.9);
-      padding: 40px 30px;
+      max-width: 600px;
+      margin: 50px auto;
+      background: white;
       border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-      position: relative;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
       text-align: center;
     }
 
+    .fondo-selva {
+      margin: 40px auto;
+      padding: 20px;
+    }
+
     h1 {
-      color: #2c7a2c;
-      font-size: 2.5em;
-      margin-bottom: 0;
-    }
-
-    h2 {
-      font-weight: 400;
-      margin-top: 10px;
-    }
-
-    .frase {
-      font-size: 1.2em;
-      margin: 25px 0;
-      color: #333;
-    }
-
-    #countdownTitle {
-      font-size: 1.2em;
-      margin-top: 25px;
-      font-weight: bold;
-    }
-
-    #countdown {
+      color: #2e7d32;
       font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .contador {
+      font-size: 1.8em;
+      color: #2e7d32;
       font-weight: bold;
-      color: #2c7a2c;
-      margin: 10px 0 20px;
-    }
-
-    .info {
-      font-size: 1.1em;
-      margin-top: 15px;
-    }
-
-    .info b {
-      color: #000;
     }
 
     .boton-desbloquear {
-      display: block;
-      margin: 100px auto;
-      padding: 20px 30px;
-      font-size: 1.3em;
-      font-weight: bold;
-      color: #fff;
-      background-color: #2c7a2c;
+      background-color: #2e7d32;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1em;
       border: none;
-      border-radius: 12px;
+      border-radius: 10px;
       cursor: pointer;
-      transition: background 0.3s ease;
-      animation: pulse 1.5s infinite;
+      margin-top: 30px;
     }
 
     .boton-desbloquear:hover {
-      background-color: #1e531e;
+      background-color: #1b5e20;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    .monkey {
+    .monito {
       position: absolute;
-      width: 70px;
-      z-index: 100;
+      width: 60px;
+      top: 10px;
     }
 
-    .monkey.left {
-      top: -30px;
-      left: -30px;
-      animation: swing 3s infinite ease-in-out;
+    .izquierda {
+      left: 10px;
     }
 
-    .monkey.right {
-      top: -30px;
-      right: -30px;
-      animation: swing 3s infinite ease-in-out alternate;
+    .derecha {
+      right: 10px;
     }
 
-    @keyframes swing {
-      0% { transform: rotate(10deg) translateY(0); }
-      50% { transform: rotate(-10deg) translateY(5px); }
-      100% { transform: rotate(10deg) translateY(0); }
+    .frase {
+      font-size: 1.1em;
+      color: #444;
+      margin: 10px 0 20px;
     }
 
-    audio {
-      display: none;
+    .mesa-regalos {
+      margin-top: 25px;
+      font-size: 1.1em;
+      color: #333;
+    }
+
+    .mesa-regalos span {
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-  <!-- Botón inicial -->
-  <button class="boton-desbloquear" onclick="mostrarInvitacion()">✨ Desbloquear Invitación ✨</button>
+  <!-- Monitos -->
+  <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="monito izquierda">
+  <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="monito derecha">
 
-  <!-- Invitación con fondo selvático -->
-  <div class="fondo-selva" id="invitacion">
+  <!-- Botón para desbloquear -->
+  <div style="text-align:center;">
+    <button class="boton-desbloquear" onclick="document.getElementById('invitacion').style.display='block'; this.style.display='none';">✨ Desbloquear Invitación ✨</button>
+  </div>
 
-    <!-- Monitos -->
-    <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" alt="Mono" class="monkey left">
-    <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" alt="Mono" class="monkey right">
-
+  <!-- Card principal de la invitación -->
+  <div class="fondo-selva" id="invitacion" style="display:none;">
     <div class="contenedor">
       <h1>Baby Shower de León Ernesto</h1>
-      <h2>Acompáñame a celebrar con mi mamá<br/>Estefany Johany de la Cruz Martínez</h2>
+      <p class="frase">Acompáñame a celebrar con mi mamá<br><strong>Estefany Johany de la Cruz Martínez</strong></p>
 
-      <div class="frase">“Sé que muchos abrazos me esperan cuando llegue al mundo,<br>¡no quiero que los tuyos falten!”</div>
+      <p style="margin-top: 25px;">FALTAN PARA EL GRAN EVENTO:</p>
+      <div class="contador" id="contador"></div>
 
-      <div id="countdownTitle">DÍAS PARA EL GRAN EVENTO</div>
-      <div id="countdown">...</div>
+      <p><strong>Fecha:</strong> 30 de agosto 2025, 5:00 PM</p>
+      <p><strong>Lugar:</strong> Hotel Hotsson Tampico, Av. Miguel Hidalgo 2000, Smith, 89140 Tampico, Tamps.</p>
 
-      <div class="info"><b>Fecha:</b> 30 de agosto 2025, 5:00 PM</div>
-      <div class="info"><b>Lugar:</b> Hotel Hotsson Tampico, Av. Miguel Hidalgo 2000, Smith, 89140 Tampico, Tamps.</div>
+      <div class="mesa-regalos">
+        <p>🎁 <span>Mesa de regalos Liverpool:</span> 51680690</p>
+      </div>
     </div>
+  </div>
 
-    <!-- Música -->
-    <audio id="musica" autoplay loop>
-      <source src="assets/musica.mp3" type="audio/mpeg">
-    </audio>
+  <!-- Segundo botón para desbloquear asistencia -->
+  <div style="text-align:center;">
+    <button class="boton-desbloquear" onclick="mostrarAsistencia()">📩 Desbloquear Asistencia</button>
+  </div>
+
+  <!-- Card de confirmación de asistencia -->
+  <div class="fondo-selva" id="asistencia" style="display:none;">
+    <div class="contenedor">
+      <h1>Confirmar Asistencia</h1>
+      <p class="frase">¿Nos acompañarás en esta celebración tan especial? ¡Confirma tu asistencia aquí!</p>
+
+      <form id="formAsistencia" onsubmit="return enviarWhatsApp();">
+        <input type="text" id="nombre" placeholder="Tu nombre" required style="width: 100%; padding: 12px; font-size: 1em; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc;">
+        <input type="text" id="invitados" placeholder="¿Con cuántas personas asistirás?" required style="width: 100%; padding: 12px; font-size: 1em; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc;">
+        <button type="submit" class="boton-desbloquear" style="margin-top: 20px;">Confirmar vía WhatsApp</button>
+      </form>
+    </div>
   </div>
 
   <script>
-    function mostrarInvitacion() {
-      document.querySelector('.boton-desbloquear').style.display = 'none';
-      document.getElementById('invitacion').style.display = 'block';
-
-      const audio = document.getElementById('musica');
-      audio.play().catch(e => {
-        console.log("El navegador bloqueó la reproducción automática.");
-      });
-    }
-
     // Cuenta regresiva
-    const countdown = document.getElementById('countdown');
-    const fechaEvento = new Date("August 30, 2025 17:00:00").getTime();
+    const fechaEvento = new Date("2025-08-30T17:00:00").getTime();
+    const contadorEl = document.getElementById("contador");
 
     setInterval(() => {
       const ahora = new Date().getTime();
-      const diferencia = fechaEvento - ahora;
+      const distancia = fechaEvento - ahora;
 
-      if (diferencia > 0) {
-        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-        const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-        const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+      const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
 
-        countdown.innerHTML = `${dias} días ${horas}h ${minutos}m ${segundos}s`;
-      } else {
-        countdown.innerHTML = "¡Es hoy!";
-      }
+      contadorEl.innerHTML = `${dias} días ${horas}h ${minutos}m ${segundos}s`;
     }, 1000);
+
+    // Mostrar card de asistencia
+    function mostrarAsistencia() {
+      document.getElementById('asistencia').style.display = 'block';
+    }
+
+    // Enviar mensaje a WhatsApp
+    function enviarWhatsApp() {
+      const nombre = document.getElementById('nombre').value.trim();
+      const invitados = document.getElementById('invitados').value.trim();
+      const mensaje = `¡Hola! Confirmo mi asistencia al Baby Shower de León Ernesto. Mi nombre es ${nombre} y asistiré con ${invitados} personas.`;
+      const numeroWhatsApp = "8332451478"; // ← pon aquí el número real sin espacios
+
+      const url = `https://wa.me/52${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, '_blank');
+      return false;
+    }
   </script>
 </body>
 </html>
