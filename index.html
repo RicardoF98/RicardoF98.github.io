@@ -4,224 +4,296 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Invitación Baby Shower León Ernesto</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Quicksand', sans-serif;
+      font-family: 'Fredoka', sans-serif;
       background: url('assets/selva.jpg') no-repeat center center fixed;
       background-size: cover;
-      color: #fff;
+      overflow-x: hidden;
     }
 
-    .card {
-      max-width: 500px;
-      margin: 2rem auto;
-      background: rgba(0,0,0,0.7);
-      padding: 2rem;
-      border-radius: 15px;
+    * {
+      box-sizing: border-box;
+    }
+
+    .contenedor {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 1rem;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      margin-top: 2rem;
       position: relative;
-      overflow: hidden;
     }
 
-    .title {
-      font-family: 'Dancing Script', cursive;
-      font-size: 2rem;
+    h1 {
+      font-size: 2.5rem;
+      color: #2e7d32;
       text-align: center;
+      margin-top: 2rem;
     }
 
-    .animal {
-      position: absolute;
+    .subtitulo {
+      font-size: 1.6rem;
+      text-align: center;
+      margin: 1rem 0 2rem;
+    }
+
+    .btn {
+      display: block;
+      margin: 1rem auto;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      background-color: #66bb6a;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .monito {
       width: 60px;
-      animation: swing 3s ease-in-out infinite;
+      position: absolute;
+      animation: columpiar 2s ease-in-out infinite alternate;
+      z-index: 10;
     }
 
-    .animal.left {
-      top: -20px;
+    .monito.izquierda {
+      top: -30px;
       left: -20px;
     }
 
-    .animal.right {
-      top: -20px;
+    .monito.derecha {
+      top: -30px;
       right: -20px;
+      transform: scaleX(-1);
     }
 
-    @keyframes swing {
-      0% { transform: rotate(5deg); }
-      50% { transform: rotate(-5deg); }
-      100% { transform: rotate(5deg); }
+    @keyframes columpiar {
+      0% { transform: translateY(0) rotate(-5deg); }
+      100% { transform: translateY(10px) rotate(5deg); }
     }
 
-    button {
-      display: block;
-      margin: 1rem auto;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 30px;
-      background-color: #ffd166;
-      color: #333;
-      cursor: pointer;
-    }
-
-    .hidden {
-      display: none;
+    .card {
+      background-color: #ffffffee;
+      border-radius: 15px;
+      padding: 1rem;
+      margin: 2rem 0;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      position: relative;
     }
 
     .countdown {
-      font-size: 1.5rem;
-      text-align: center;
-      margin-top: 1rem;
-    }
-
-    .label {
+      font-size: 1.8rem;
       font-weight: bold;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-
-    .select-group {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-    }
-
-    .info {
-      margin-top: 1rem;
       text-align: center;
-      font-style: italic;
+      color: #1b5e20;
     }
 
-    input, select {
-      padding: 0.5rem;
-      font-size: 1rem;
-      margin-top: 0.25rem;
+    label, select, input {
+      display: block;
       width: 100%;
-      border-radius: 10px;
-      border: none;
+      font-size: 1rem;
+      margin-top: 1rem;
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
     }
 
-    @media (max-width: 480px) {
-      .card {
-        margin: 1rem;
-        padding: 1rem;
+    .leyenda {
+      font-size: 1rem;
+      text-align: center;
+      margin-top: 1rem;
+      color: #2e7d32;
+      font-weight: bold;
+    }
+
+    .flecha-abajo {
+      display: block;
+      margin: 1rem auto 0;
+      font-size: 2rem;
+      animation: salto 1s infinite;
+      text-align: center;
+    }
+
+    @keyframes salto {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
+
+    .btn-fecha {
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      background-color: #43a047;
+      color: white;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      font-size: 26px;
+      text-align: center;
+      line-height: 55px;
+      text-decoration: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 999;
+    }
+
+    .leyenda-fecha {
+      position: fixed;
+      bottom: 15px;
+      right: 10px;
+      max-width: 150px;
+      font-size: 0.75rem;
+      color: white;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 6px;
+      border-radius: 8px;
+      font-weight: bold;
+      z-index: 998;
+    }
+
+    @media screen and (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
       }
-      .title {
-        font-size: 1.6rem;
+      .countdown {
+        font-size: 1.2rem;
+      }
+      .btn {
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
+  <div class="contenedor">
+    <img src="https://www.flaticon.es/icono-gratis/leon_1998713?" class="monito izquierda" alt="monito"/>
+    <img src=" https://www.flaticon.es/icono-gratis/tigre_1998804?" class="monito derecha" alt="monito"/>
 
-  <!-- CARD 1: Presentación -->
-  <div class="card" id="card-presentacion">
-    <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="animal left" alt="mono" />
-    <img src="https://cdn-icons-png.flaticon.com/512/1998/1998713.png" class="animal right" alt="leon" />
-    <div class="title">Baby Shower León Ernesto</div>
-    <p style="text-align:center;">¡Acompaña a mi mamá Estefany Johany de la Cruz Martínez en esta celebración tan especial!</p>
-    <button id="btn-desbloquear">Desbloquear invitación</button>
-    <p class="info">PULSAR AMBOS BOTONES PARA DESBLOQUEAR SU CONTENIDO</p>
-  </div>
+    <h1>Baby Shower de León Ernesto</h1>
+    <p class="subtitulo">Acompáñame a celebrar con mi mamá<br><strong>Estefany Johany de la Cruz Martínez</strong></p>
 
-  <!-- CARD 2: Cuenta regresiva y detalles -->
-  <div class="card hidden" id="card-detalles">
-    <img src="https://cdn-icons-png.flaticon.com/512/7743/7743300.png" class="animal left" alt="elefante" />
-    <img src="https://cdn-icons-png.flaticon.com/512/848/848579.png" class="animal right" alt="jirafa" />
-    <div class="title">DÍAS PARA EL GRAN EVENTO</div>
-    <div class="countdown" id="countdown">Cargando...</div>
-    <p style="text-align:center;">📅 30 de agosto 2025 a las 5:00 PM</p>
-    <p style="text-align:center;">📍 Hotel Hotsson Tampico - Av. Miguel Hidalgo 2000, Smith, 89140 Tampico, Tamps.</p>
-    <p class="info">💝 Mesa de regalos Liverpool: <strong>51680690</strong></p>
-    <button onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Baby+Shower+León+Ernesto&dates=20250830T230000Z/20250831T010000Z&details=Hotel+Hotsson+Tampico&location=Av.+Miguel+Hidalgo+2000,+Smith,+Tampico','_blank')">Agregar al Calendario</button>
-    <p class="info">AGREGALO AL CALENDARIO PARA NO PERDERTE DE ESTE GRAN EVENTO</p>
-  </div>
+    <button class="btn" onclick="mostrarCuenta()">Desbloquear invitación</button>
+    <button class="btn" onclick="mostrarFormulario()">Desbloquear asistencia</button>
+    <p class="leyenda">PULSAR AMBOS BOTONES PARA DESBLOQUEAR SU CONTENIDO</p>
+    <div class="flecha-abajo">⬇️</div>
 
-  <!-- CARD 3: Confirmación -->
-  <div class="card hidden" id="card-asistencia">
-    <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" class="animal left" alt="koala" />
-    <img src="https://cdn-icons-png.flaticon.com/512/1998/1998804.png" class="animal right" alt="tigre" />
-    <div class="title">Confirmar Asistencia</div>
-    <label class="label" for="nombre">Nombre:</label>
-    <input type="text" id="nombre" />
-
-    <label class="label" for="asistire">¿Asistiré?</label>
-    <select id="asistire" onchange="togglePersonas()">
-      <option value="">Selecciona</option>
-      <option value="si">Sí</option>
-      <option value="no">No</option>
-    </select>
-
-    <div id="personas-container" class="hidden">
-      <label class="label" for="num-personas">Número de personas:</label>
-      <select id="num-personas">
-        <option value="1">1</option>
-        <option value="2">2</option>
-      </select>
+    <div id="cardCuenta" class="card" style="display:none">
+      <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="monito izquierda" alt="monito"/>
+      <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="monito derecha" alt="monito"/>
+      <h3 style="text-align:center;">FALTAN...</h3>
+      <div id="countdown" class="countdown">Cargando cuenta regresiva...</div>
+      <p style="text-align:center;margin-top:1rem;"><strong>Fecha:</strong> 30 de agosto 2025, 5:00 PM</p>
+      <p style="text-align:center;"><strong>Lugar:</strong> Hotel Hotsson Tampico</p>
+      <p style="text-align:center;"><strong>Mesa de Regalos:</strong> Liverpool 51680690 🎁</p>
     </div>
 
-    <p style="text-align:center;margin-top:1rem;"><strong>Evento SOLO PARA MUJERES</strong></p>
-    <button onclick="enviarWhatsapp()">Enviar por WhatsApp</button>
+    <div id="cardAsistencia" class="card" style="display:none">
+      <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="monito izquierda" alt="monito"/>
+      <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="monito derecha" alt="monito"/>
+      <h3 style="text-align:center;">Confirmar Asistencia</h3>
+      <label>Tu nombre:</label>
+      <input type="text" id="nombre" placeholder="Ej. Ana López">
+
+      <label>¿Asistirás?</label>
+      <select id="asistencia" onchange="toggleAsistencia()">
+        <option value="">Selecciona</option>
+        <option value="Sí">Sí</option>
+        <option value="No">No</option>
+      </select>
+
+      <div id="personasContainer" style="display:none">
+        <label>¿Cuántas personas?</label>
+        <select id="personas">
+          <option value="1">1 persona</option>
+          <option value="2">2 personas</option>
+        </select>
+      </div>
+
+      <p style="text-align:center;font-size:0.9rem;color:#d32f2f;"><strong>EVENTO SOLO PARA MUJERES</strong></p>
+
+      <button class="btn" onclick="enviarWhatsApp()">Confirmar por WhatsApp</button>
+    </div>
   </div>
 
-  <audio id="musica" src="assets/musica.mp3"></audio>
+  <!-- Botón flotante y leyenda de calendario -->
+<a class="btn-fecha" href="assets/babyshower.ics" download>
+  📅
+</a>
+<div class="leyenda-fecha">
+  AGRÉGALO AL CALENDARIO PARA NO PERDERTE DE ESTE GRAN EVENTO
+</div>
+
+  <audio id="musicaFondo" src="assets/musica.mp3" type="audio/mpeg"></audio>
 
   <script>
-    const btnDesbloquear = document.getElementById('btn-desbloquear');
-    const cardDetalles = document.getElementById('card-detalles');
-    const cardAsistencia = document.getElementById('card-asistencia');
-    const musica = document.getElementById('musica');
+    const fechaEvento = new Date("August 30, 2025 17:00:00").getTime();
+    let audioReproducido = false;
 
-    btnDesbloquear.addEventListener('click', () => {
-      cardDetalles.classList.remove('hidden');
-      cardAsistencia.classList.remove('hidden');
-      musica.play();
-    });
-
-    function togglePersonas() {
-      const asistire = document.getElementById('asistire').value;
-      const container = document.getElementById('personas-container');
-      container.classList.toggle('hidden', asistire !== 'si');
-    }
-
-    function enviarWhatsapp() {
-      const nombre = document.getElementById('nombre').value.trim();
-      const asistire = document.getElementById('asistire').value;
-      const numPersonas = document.getElementById('num-personas').value;
-      let mensaje = '';
-
-      if (asistire === 'si') {
-        if (numPersonas === '1') {
-          mensaje = `Hola, mi nombre es ${nombre} y asistiré al baby shower de León Ernesto. Seré 1 persona.`;
-        } else {
-          mensaje = `Hola, mi nombre es ${nombre} y asistiremos 2 personas al baby shower de León Ernesto.`;
-        }
-      } else if (asistire === 'no') {
-        mensaje = `Hola, soy ${nombre}. Mil disculpas, no podré asistir al baby shower de León Ernesto.`;
+    function mostrarCuenta() {
+      document.getElementById("cardCuenta").style.display = "block";
+      if (!audioReproducido) {
+        document.getElementById("musicaFondo").play().catch(()=>{});
+        audioReproducido = true;
       }
-
-      const url = `https://wa.me/5218332451478?text=${encodeURIComponent(mensaje)}`;
-      window.open(url, '_blank');
+      iniciarCountdown();
     }
 
-    function countdown() {
-      const target = new Date("2025-08-30T17:00:00").getTime();
-      const countdownEl = document.getElementById("countdown");
+    function mostrarFormulario() {
+      document.getElementById("cardAsistencia").style.display = "block";
+    }
 
+    function toggleAsistencia() {
+      const val = document.getElementById("asistencia").value;
+      document.getElementById("personasContainer").style.display = val === "Sí" ? "block" : "none";
+    }
+
+    function iniciarCountdown() {
+      const el = document.getElementById("countdown");
       setInterval(() => {
-        const now = new Date().getTime();
-        const distance = target - now;
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        if (days >= 0) {
-          countdownEl.innerText = `${days} días`;
-        } else {
-          countdownEl.innerText = "¡Hoy es el gran día!";
+        const ahora = new Date().getTime();
+        const diff = fechaEvento - ahora;
+        if (diff < 0) {
+          el.textContent = "¡El evento ha comenzado!";
+          return;
         }
+        const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((diff % (1000 * 60)) / 1000);
+        el.textContent = `${dias} días ${horas}h ${minutos}m ${segundos}s`;
       }, 1000);
     }
 
-    countdown();
+    function enviarWhatsApp() {
+      const nombre = document.getElementById("nombre").value.trim();
+      const asistencia = document.getElementById("asistencia").value;
+      const personas = document.getElementById("personas").value;
+
+      if (!nombre || asistencia === "") {
+        alert("Por favor completa todos los campos.");
+        return;
+      }
+
+      let mensaje = "";
+
+      if (asistencia === "Sí") {
+        mensaje = `Hola, mi nombre es ${nombre} y confirmo mi asistencia al baby shower de León Ernesto. `;
+        mensaje += personas === "1" ? "Asistirá una persona." : "Asistiremos dos personas.";
+      } else {
+        mensaje = `Hola, mi nombre es ${nombre}. Mil disculpas, no podré asistir al baby shower de León Ernesto.`;
+      }
+
+      window.open(`https://wa.me/5218332451478?text=${encodeURIComponent(mensaje)}`);
+    }
   </script>
 </body>
 </html>
