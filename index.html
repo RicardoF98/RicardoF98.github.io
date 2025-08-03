@@ -82,12 +82,6 @@
       margin-bottom: 0.5rem;
     }
 
-    .select-group {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-    }
-
     .info {
       margin-top: 1rem;
       text-align: center;
@@ -101,9 +95,6 @@
       width: 100%;
       border-radius: 10px;
       border: none;
-    }
-
-    textarea {
       resize: vertical;
     }
 
@@ -131,10 +122,10 @@
     <div class="title">Baby Shower León Ernesto</div>
     <p style="text-align:center;">¡Acompaña a mi mamá Estefany Johany de la Cruz Martínez en esta celebración tan especial!</p>
     <button id="btn-desbloquear">Desbloquear invitación</button>
-    <p class="info">PULSAR EL BOTÓN PARA DESBLOQUEAR SU CONTENIDO</p>
+    <p class="info">PULSA EL BOTÓN PARA DESBLOQUEAR SU CONTENIDO</p>
   </div>
 
-  <!-- CARD 2: Detalles -->
+  <!-- CARD 2: Cuenta regresiva y detalles -->
   <div class="card hidden" id="card-detalles">
     <img src="https://cdn-icons-png.flaticon.com/512/7743/7743300.png" class="animal left" alt="elefante" />
     <img src="https://cdn-icons-png.flaticon.com/512/848/848579.png" class="animal right" alt="jirafa" />
@@ -152,7 +143,6 @@
     <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" class="animal left" alt="koala" />
     <img src="https://cdn-icons-png.flaticon.com/512/4600/4600423.png" class="animal right" alt="mono" />
     <div class="title">Confirmar Asistencia</div>
-
     <label class="label" for="nombre">Nombre:</label>
     <input type="text" id="nombre" />
 
@@ -171,24 +161,31 @@
       </select>
     </div>
 
-    <label class="label" for="comentario">Comentario especial para la mamá 💖</label>
-    <textarea id="comentario" rows="3"></textarea>
+    <label class="label" for="comentario">Comentario especial ❤️</label>
+    <textarea id="comentario" rows="3" placeholder="Escribe algo bonito para la mamá..."></textarea>
 
     <p style="text-align:center;margin-top:1rem;"><strong>Evento SOLO PARA MUJERES</strong></p>
     <button onclick="enviarWhatsapp()">Enviar por WhatsApp</button>
   </div>
 
-  <!-- Comentarios -->
+  <!-- CARD 4: Comentarios -->
   <div class="card" id="comentarios">
     <div class="title">Comentarios de los invitados 💬</div>
     <div id="lista-comentarios"></div>
   </div>
 
+  <!-- CARD 5: Subir fotos -->
+  <div class="card" id="card-fotos">
+    <div class="title">📸 Comparte tus fotos del evento</div>
+    <p style="text-align:center;">Queremos guardar los mejores recuerdos de este día tan especial. ¡Súbelas aquí y forma parte del álbum de León Ernesto! 🦁✨</p>
+    <button onclick="window.open('https://forms.gle/oGv78SM5kbwUUCRj9', '_blank')">
+      Subir Fotos al Álbum
+    </button>
+  </div>
+
   <audio id="musica" src="assets/musica.mp3"></audio>
 
   <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
   <script>
@@ -201,7 +198,6 @@
       messagingSenderId: "470717032691",
       appId: "1:470717032691:web:4b46f108925e14d24f6f86"
     };
-
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
   </script>
@@ -229,18 +225,15 @@
       const asistire = document.getElementById('asistire').value;
       const numPersonas = document.getElementById('num-personas').value;
       const comentario = document.getElementById('comentario').value.trim();
-      let mensaje = '';
 
       if (!nombre || !asistire) {
         alert("Por favor completa tu nombre y si asistirás.");
         return;
       }
 
-      if (asistire === 'si') {
-        mensaje = `Hola, mi nombre es ${nombre} y asistiré al baby shower de León Ernesto. Será ${numPersonas} persona(s).`;
-      } else {
-        mensaje = `Hola, soy ${nombre}. Mil disculpas, no podré asistir al baby shower de León Ernesto.`;
-      }
+      let mensaje = asistire === 'si'
+        ? `Hola, mi nombre es ${nombre} y asistiré al baby shower de León Ernesto. Será ${numPersonas} persona(s).`
+        : `Hola, soy ${nombre}. Mil disculpas, no podré asistir al baby shower de León Ernesto.`;
 
       db.ref("asistencias").push({
         nombre,
@@ -256,53 +249,51 @@
 
     function abrirCalendario() {
       const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-      const link = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Baby+Shower+León+Ernesto&dates=20250830T230000Z/20250831T010000Z&details=Hotel+Hotsson+Tampico&location=Av.+Miguel+Hidalgo+2000,+Smith,+Tampico';
-      if (isIOS) {
-        window.location.href = 'webcal://' + link.replace(/^https?:\/\//, '');
-      } else {
-        window.open(link, '_blank');
-      }
+      const url = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Baby+Shower+León+Ernesto&dates=20250830T230000Z/20250831T010000Z&details=Hotel+Hotsson+Tampico&location=Av.+Miguel+Hidalgo+2000,+Smith,+Tampico';
+      window.open(isIOS ? url.replace('https://', 'webcal://') : url, '_blank');
     }
 
     function countdown() {
-      const targetDate = new Date("2025-08-30T17:00:00");
-      const el = document.getElementById("countdown");
+      const targetDate = new Date('2025-08-30T17:00:00');
+      const countdownEl = document.getElementById('countdown');
 
-      function update() {
+      function updateCountdown() {
         const now = new Date();
         const diff = targetDate - now;
 
         if (diff <= 0) {
-          el.innerText = "¡Es hoy! 🎉";
+          countdownEl.textContent = "¡Hoy es el gran día!";
           return;
         }
 
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const mins = Math.floor((diff / (1000 * 60)) % 60);
-
-        el.innerText = `${days} días, ${hours} hrs, ${mins} min`;
-        requestAnimationFrame(update);
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        countdownEl.textContent = `${days} días, ${hours} horas, ${minutes} minutos`;
       }
 
-      update();
+      updateCountdown();
+      setInterval(updateCountdown, 60000);
+    }
+
+    function cargarComentarios() {
+      const lista = document.getElementById("lista-comentarios");
+      db.ref("asistencias").orderByChild("fecha").on("value", snapshot => {
+        lista.innerHTML = "";
+        snapshot.forEach(child => {
+          const data = child.val();
+          if (data.comentario) {
+            const div = document.createElement("div");
+            div.innerHTML = `<p><strong>${data.nombre}</strong>: ${data.comentario}</p>`;
+            lista.appendChild(div);
+          }
+        });
+      });
     }
 
     countdown();
-
-    // Mostrar comentarios guardados
-    firebase.database().ref("asistencias").on("value", (snapshot) => {
-      const lista = document.getElementById("lista-comentarios");
-      lista.innerHTML = "";
-      snapshot.forEach(child => {
-        const data = child.val();
-        if (data.comentario && data.comentario.trim() !== "") {
-          const div = document.createElement("div");
-          div.innerHTML = `<p><strong>${data.nombre}</strong>: ${data.comentario}</p>`;
-          lista.appendChild(div);
-        }
-      });
-    });
+    cargarComentarios();
   </script>
+
 </body>
 </html>
