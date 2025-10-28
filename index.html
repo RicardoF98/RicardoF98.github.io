@@ -3,201 +3,138 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Invitación Cumpleaños Carlota Margarita</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet">
+  <title>Invitación Carlota - 87 años</title>
   <style>
-    * { box-sizing: border-box; }
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Open Sans', sans-serif;
-      background: url('https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(145deg, #f7f5f2, #e5e4e2);
+      overflow: hidden;
     }
 
-    .overlay {
-      background: rgba(0, 0, 0, 0.65);
+    .sobre {
+      width: 250px;
+      height: 160px;
+      background: linear-gradient(#f2e8dc, #d6c8b0);
+      margin: 100px auto;
+      position: relative;
+      border: 2px solid #c0a96e;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 1s ease-in-out;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .sobre::before, .sobre::after {
+      content: '';
       position: absolute;
-      top: 0; left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1;
+      background: inherit;
+      transform-origin: top center;
+      transition: transform 1s;
     }
 
-    .container {
-      max-width: 700px;
-      margin: auto;
-      padding: 50px 30px;
-      background: rgba(255, 255, 255, 0.1);
+    .sobre::before {
+      top: 0;
+      left: 0;
+      transform: rotateX(0deg);
+    }
+
+    .sobre.abierto::before {
+      transform: rotateX(-180deg);
+    }
+
+    .invitacion {
+      display: none;
+      max-width: 500px;
+      background: white;
+      border: 3px solid #c0a96e;
+      margin: 40px auto;
+      padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 0 30px rgba(255,255,255,0.1);
-      text-align: center;
-      position: relative;
-      z-index: 1;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      animation: fadeIn 2s ease;
+    }
+
+    .invitacion.visible {
+      display: block;
     }
 
     h1, h2 {
-      font-family: 'Playfair Display', serif;
+      text-align: center;
+      color: #a88c4f;
     }
 
-    .header {
-      font-size: 3em;
-      color: #f4d35e;
-      margin-bottom: 10px;
-      text-shadow: 2px 2px 8px #000;
-    }
-
-    .subtitle {
+    p {
       font-size: 1.2em;
-      color: #dcdcdc;
-      margin-bottom: 20px;
-      font-style: italic;
+      text-align: center;
+      color: #555;
     }
 
-    .details {
-      font-size: 1.1em;
-      line-height: 1.8;
-      margin-bottom: 30px;
-      color: #fff;
-    }
-
-    .form-group {
-      text-align: left;
-      margin-bottom: 15px;
-    }
-
-    label {
+    .btn-whatsapp {
       display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-      color: #fff;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1em;
-      background: rgba(255,255,255,0.9);
-    }
-
-    button {
-      background: #f4d35e;
-      color: #000;
-      border: none;
-      padding: 12px 20px;
-      font-size: 1em;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    button:hover {
-      background: #eac54f;
-    }
-
-    .whatsapp-btn {
-      margin-top: 20px;
-      display: inline-block;
-      background-color: #25D366;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 6px;
+      text-align: center;
+      margin: 25px auto 0;
+      padding: 12px 25px;
       font-size: 1.1em;
+      background: #25D366;
+      color: white;
+      border: none;
+      border-radius: 30px;
       text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
     }
 
-    .audio-control {
-      position: fixed;
-      bottom: 15px;
-      right: 15px;
-      z-index: 999;
-      background: rgba(255,255,255,0.2);
-      padding: 10px;
-      border-radius: 8px;
-      backdrop-filter: blur(5px);
+    .btn-whatsapp:hover {
+      background: #1ebc5b;
     }
 
-    @media (max-width: 600px) {
-      .container {
-        padding: 30px 20px;
-      }
-
-      .header {
-        font-size: 2em;
-      }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
     }
   </style>
 </head>
 <body>
 
-  <div class="overlay"></div>
+  <!-- Audio -->
+  <audio id="musicaFondo" src="assets/musica.mp3" autoplay loop></audio>
 
-  <div class="container">
-    <h1 class="header">¡Estás invitado!</h1>
-    <p class="subtitle">A celebrar los 87 años de</p>
-    <h2 style="color: #fff;">Carlota Margarita Pérez Lara</h2>
+  <!-- Sobre animado -->
+  <div class="sobre" onclick="abrirInvitacion()"></div>
 
-    <div class="details">
-      ✨ Lugar: <strong>Salón VIP</strong><br/>
-      📍 <b>5 de Mayo 611</b>, Col. Primero de Mayo<br/>
-      Entre Haití y Revolución, Cd. Madero, Tamaulipas<br/>
-      📅 <b>08 de noviembre</b> &nbsp;&nbsp; 🕖 <b>7:00 PM</b>
-    </div>
-
-    <form id="formularioAsistencia">
-      <div class="form-group">
-        <label for="nombre">Tu nombre completo:</label>
-        <input type="text" id="nombre" name="nombre" required />
-      </div>
-      <div class="form-group">
-        <label for="asistencia">¿Asistirás?</label>
-        <select id="asistencia" name="asistencia" required>
-          <option value="">Selecciona una opción</option>
-          <option value="Sí, claro">Sí, claro</option>
-          <option value="Tal vez">Tal vez</option>
-          <option value="No podré">No podré</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="mensaje">Mensaje para Carlota:</label>
-        <textarea id="mensaje" name="mensaje" rows="3"></textarea>
-      </div>
-      <button type="submit">Enviar Confirmación</button>
-    </form>
-
-    <a id="whatsappLink" class="whatsapp-btn" target="_blank" href="#">
-      Confirmar por WhatsApp
-    </a>
-  </div>
-
-  <div class="audio-control">
-    <audio id="bgMusic" autoplay loop controls>
-      <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
-      Tu navegador no soporta el audio.
-    </audio>
+  <!-- Contenido de la invitación -->
+  <div class="invitacion" id="invitacionContenido">
+    <h1>¡Estás invitado/a!</h1>
+    <h2>Carlota Margarita Pérez Lara</h2>
+    <p>Te esperamos para celebrar su <strong>cumpleaños número 87</strong></p>
+    <p>🗓 <strong>08 de noviembre</strong> a las <strong>7:00 PM</strong></p>
+    <p>📍 Salón VIP, Calle 5 de Mayo 611, Col. Primero de Mayo,<br>entre Haití y Revolución, Cd. Madero, Tamaulipas.</p>
+    <a class="btn-whatsapp" href="https://wa.me/5218332451478?text=Hola%2C%20confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Carlota%20Margarita%20Pérez%20Lara%20el%208%20de%20noviembre%20a%20las%207%20PM" target="_blank">Confirmar por WhatsApp</a>
   </div>
 
   <script>
-    const form = document.getElementById("formularioAsistencia");
-    const whatsappBtn = document.getElementById("whatsappLink");
+    function abrirInvitacion() {
+      const sobre = document.querySelector('.sobre');
+      const invitacion = document.getElementById('invitacionContenido');
+      const musica = document.getElementById('musicaFondo');
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
+      sobre.classList.add('abierto');
+      setTimeout(() => {
+        invitacion.classList.add('visible');
+        musica.play();
+      }, 1000);
+    }
 
-      const nombre = document.getElementById("nombre").value.trim();
-      const asistencia = document.getElementById("asistencia").value;
-      const mensaje = document.getElementById("mensaje").value.trim();
-
-      const texto = `Hola, soy ${nombre}. Confirmo: ${asistencia}. Mensaje para Carlota: ${mensaje}`;
-      const whatsappURL = `https://wa.me/5218332451478?text=${encodeURIComponent(texto)}`;
-
-      whatsappBtn.href = whatsappURL;
-      alert("Ahora haz clic en el botón verde para confirmar vía WhatsApp.");
-    });
+    window.onload = () => {
+      // Asegura reproducción automática si el navegador lo permite
+      const musica = document.getElementById('musicaFondo');
+      musica.play().catch(() => {
+        // si falla por políticas del navegador, se reproduce al abrir sobre
+      });
+    };
   </script>
-
 </body>
 </html>
