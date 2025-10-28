@@ -3,138 +3,178 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Invitación Carlota - 87 años</title>
+  <title>Invitación 87 Carlota</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: 'Georgia', serif;
-      background: linear-gradient(145deg, #f7f5f2, #e5e4e2);
-      overflow: hidden;
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(to bottom, #f7f5f0, #e0ded7);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* --- SOBRE --- */
+    .sobre-container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: all 0.6s ease;
     }
 
     .sobre {
-      width: 250px;
-      height: 160px;
-      background: linear-gradient(#f2e8dc, #d6c8b0);
-      margin: 100px auto;
+      width: 280px;
+      height: 180px;
+      background: linear-gradient(to bottom, #fff, #dcdcdc);
       position: relative;
-      border: 2px solid #c0a96e;
+      border: 2px solid #c9c9c9;
       border-radius: 8px;
       cursor: pointer;
-      transition: transform 1s ease-in-out;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      overflow: hidden;
     }
 
-    .sobre::before, .sobre::after {
-      content: '';
+    .tapa {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      background: inherit;
-      transform-origin: top center;
-      transition: transform 1s;
-    }
-
-    .sobre::before {
       top: 0;
       left: 0;
-      transform: rotateX(0deg);
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(to top, #eee, #ccc);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transition: transform 1s ease;
+      transform-origin: top center;
+      z-index: 2;
     }
 
-    .sobre.abierto::before {
-      transform: rotateX(-180deg);
+    .sello {
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle at 30% 30%, #d4af37, #a67c00);
+      border-radius: 50%;
+      position: absolute;
+      bottom: 10px;
+      left: calc(50% - 30px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      z-index: 3;
     }
 
+    /* --- INVITACIÓN --- */
     .invitacion {
       display: none;
-      max-width: 500px;
-      background: white;
-      border: 3px solid #c0a96e;
+      padding: 40px 20px;
+      max-width: 600px;
       margin: 40px auto;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-      animation: fadeIn 2s ease;
-    }
-
-    .invitacion.visible {
-      display: block;
-    }
-
-    h1, h2 {
       text-align: center;
-      color: #a88c4f;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      animation: fadeIn 1.5s ease;
     }
 
-    p {
-      font-size: 1.2em;
-      text-align: center;
+    .invitacion h1 {
+      font-size: 2.4rem;
+      color: #b59b42;
+      margin-bottom: 10px;
+    }
+
+    .invitacion p {
+      font-size: 1.1rem;
       color: #555;
+      line-height: 1.6;
     }
 
-    .btn-whatsapp {
-      display: block;
-      text-align: center;
-      margin: 25px auto 0;
-      padding: 12px 25px;
-      font-size: 1.1em;
+    .foto-carlota {
+      width: 120px;
+      border-radius: 12px;
+      margin: 20px auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .btn-wsp {
+      margin-top: 20px;
+      display: inline-block;
       background: #25D366;
       color: white;
-      border: none;
-      border-radius: 30px;
+      padding: 12px 20px;
+      border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
-      transition: background 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
 
-    .btn-whatsapp:hover {
-      background: #1ebc5b;
+    .btn-wsp:hover {
+      background: #1ebe5d;
     }
 
     @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(-20px);}
-      to {opacity: 1; transform: translateY(0);}
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    audio {
+      display: none;
     }
   </style>
 </head>
 <body>
 
-  <!-- Audio -->
-  <audio id="musicaFondo" src="assets/musica.mp3" autoplay loop></audio>
-
-  <!-- Sobre animado -->
-  <div class="sobre" onclick="abrirInvitacion()"></div>
-
-  <!-- Contenido de la invitación -->
-  <div class="invitacion" id="invitacionContenido">
-    <h1>¡Estás invitado/a!</h1>
-    <h2>Carlota Margarita Pérez Lara</h2>
-    <p>Te esperamos para celebrar su <strong>cumpleaños número 87</strong></p>
-    <p>🗓 <strong>08 de noviembre</strong> a las <strong>7:00 PM</strong></p>
-    <p>📍 Salón VIP, Calle 5 de Mayo 611, Col. Primero de Mayo,<br>entre Haití y Revolución, Cd. Madero, Tamaulipas.</p>
-    <a class="btn-whatsapp" href="https://wa.me/5218332451478?text=Hola%2C%20confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Carlota%20Margarita%20Pérez%20Lara%20el%208%20de%20noviembre%20a%20las%207%20PM" target="_blank">Confirmar por WhatsApp</a>
+<!-- SOBRE INICIAL -->
+<div class="sobre-container" id="pantallaSobre" onclick="abrirInvitacion()">
+  <div class="sobre">
+    <div class="tapa" id="tapaSobre"></div>
+    <div class="sello">87 🎂</div>
   </div>
+  <p class="text-muted mt-3">Haz clic en el sobre para abrir la invitación</p>
+</div>
 
-  <script>
-    function abrirInvitacion() {
-      const sobre = document.querySelector('.sobre');
-      const invitacion = document.getElementById('invitacionContenido');
-      const musica = document.getElementById('musicaFondo');
+<!-- INVITACIÓN -->
+<div class="invitacion" id="invitacion">
+  <img src="assets/carlota.jpg" alt="Carlota" class="foto-carlota">
+  <h1>Estás invitado/a</h1>
+  <p>A la celebración del <strong>cumpleaños número 87</strong> de</p>
+  <p><strong>Carlota Margarita Pérez Lara</strong></p>
 
-      sobre.classList.add('abierto');
-      setTimeout(() => {
-        invitacion.classList.add('visible');
-        musica.play();
-      }, 1000);
-    }
+  <p>📍 <strong>Ubicación:</strong><br>
+  Salón VIP, Calle 5 de Mayo 611, Col. Primero de Mayo,<br>
+  entre Haití y Revolución, Cd. Madero, Tamps.</p>
 
-    window.onload = () => {
-      // Asegura reproducción automática si el navegador lo permite
-      const musica = document.getElementById('musicaFondo');
-      musica.play().catch(() => {
-        // si falla por políticas del navegador, se reproduce al abrir sobre
-      });
-    };
-  </script>
+  <p>📅 <strong>Fecha:</strong> 8 de noviembre<br>
+     🕖 <strong>Hora:</strong> 7:00 PM</p>
+
+  <a href="https://api.whatsapp.com/send?phone=5218332451478&text=Hola%2C%20confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Carlota%2087%20años.%20¡Nos%20vemos%20en%20el%20evento!" class="btn-wsp" target="_blank">
+    Confirmar asistencia por WhatsApp
+  </a>
+
+  <p style="margin-top: 20px; font-size: 0.9rem; color: #999;">¡Te esperamos con mucho cariño!</p>
+</div>
+
+<!-- AUDIO -->
+<audio id="musica" src="assets/musica.mp3" preload="auto"></audio>
+
+<script>
+  function abrirInvitacion() {
+    document.getElementById('tapaSobre').style.transform = 'rotateX(180deg)';
+    setTimeout(() => {
+      document.getElementById('pantallaSobre').style.display = 'none';
+      document.getElementById('invitacion').style.display = 'block';
+      document.getElementById('musica').play();
+    }, 1200);
+  }
+</script>
+
 </body>
 </html>
