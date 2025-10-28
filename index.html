@@ -6,96 +6,123 @@
   <title>Invitación Cumpleaños Carlota Margarita</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet">
   <style>
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       padding: 0;
       font-family: 'Open Sans', sans-serif;
-      background: linear-gradient(to bottom, #f5f5f5, #e0e0e0);
-      color: #333;
+      background: url('https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+
+    .overlay {
+      background: rgba(0, 0, 0, 0.65);
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
     }
 
     .container {
       max-width: 700px;
-      margin: 0 auto;
-      padding: 40px 30px;
-      background: white;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-      border-radius: 12px;
-      margin-top: 40px;
+      margin: auto;
+      padding: 50px 30px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(255,255,255,0.1);
       text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
     }
 
     .header {
-      background: linear-gradient(to right, #c9a44f, #d7d7d7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5em;
+      font-size: 3em;
+      color: #f4d35e;
       margin-bottom: 10px;
+      text-shadow: 2px 2px 8px #000;
     }
 
     .subtitle {
       font-size: 1.2em;
-      font-style: italic;
-      color: #777;
+      color: #dcdcdc;
       margin-bottom: 20px;
+      font-style: italic;
     }
 
     .details {
       font-size: 1.1em;
       line-height: 1.8;
       margin-bottom: 30px;
-      color: #444;
-    }
-
-    .gold {
-      color: #c9a44f;
-      font-weight: bold;
+      color: #fff;
     }
 
     .form-group {
-      margin-bottom: 15px;
       text-align: left;
+      margin-bottom: 15px;
     }
 
     label {
       display: block;
+      font-weight: bold;
       margin-bottom: 5px;
-      font-weight: 600;
+      color: #fff;
     }
 
     input, select, textarea {
       width: 100%;
       padding: 10px;
-      border: 1px solid #bbb;
-      border-radius: 6px;
+      border: none;
+      border-radius: 8px;
       font-size: 1em;
+      background: rgba(255,255,255,0.9);
     }
 
     button {
-      background: #c9a44f;
-      color: white;
+      background: #f4d35e;
+      color: #000;
       border: none;
       padding: 12px 20px;
       font-size: 1em;
       border-radius: 6px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      margin-top: 10px;
     }
 
     button:hover {
-      background: #b3903f;
+      background: #eac54f;
     }
 
-    .footer {
-      margin-top: 30px;
-      font-size: 0.9em;
-      color: #999;
+    .whatsapp-btn {
+      margin-top: 20px;
+      display: inline-block;
+      background-color: #25D366;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 1.1em;
+      text-decoration: none;
+    }
+
+    .audio-control {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      z-index: 999;
+      background: rgba(255,255,255,0.2);
+      padding: 10px;
+      border-radius: 8px;
+      backdrop-filter: blur(5px);
     }
 
     @media (max-width: 600px) {
       .container {
-        padding: 25px 20px;
+        padding: 30px 20px;
       }
 
       .header {
@@ -106,44 +133,71 @@
 </head>
 <body>
 
+  <div class="overlay"></div>
+
   <div class="container">
-    <h1 class="header">¡Estás cordialmente invitado!</h1>
-    <p class="subtitle">Celebra con nosotros el cumpleaños #87 de</p>
-    <h2 style="font-size: 2em; color: #444;">Carlota Margarita Pérez Lara</h2>
+    <h1 class="header">¡Estás invitado!</h1>
+    <p class="subtitle">A celebrar los 87 años de</p>
+    <h2 style="color: #fff;">Carlota Margarita Pérez Lara</h2>
 
     <div class="details">
-      🥂 Acompáñanos a una noche inolvidable en el <span class="gold">Salón VIP</span><br/>
-      📍 Ubicados en calle <b>5 de Mayo 611</b>, Colonia Primero de Mayo,<br/>
-      Entre Haití y Revolución, <b>Cd. Madero, Tamaulipas</b><br/>
+      ✨ Lugar: <strong>Salón VIP</strong><br/>
+      📍 <b>5 de Mayo 611</b>, Col. Primero de Mayo<br/>
+      Entre Haití y Revolución, Cd. Madero, Tamaulipas<br/>
       📅 <b>08 de noviembre</b> &nbsp;&nbsp; 🕖 <b>7:00 PM</b>
     </div>
 
-    <form action="https://formspree.io/f/tu_form_id_aqui" method="POST">
+    <form id="formularioAsistencia">
       <div class="form-group">
         <label for="nombre">Tu nombre completo:</label>
         <input type="text" id="nombre" name="nombre" required />
       </div>
       <div class="form-group">
-        <label for="asistencia">¿Confirmas tu asistencia?</label>
+        <label for="asistencia">¿Asistirás?</label>
         <select id="asistencia" name="asistencia" required>
           <option value="">Selecciona una opción</option>
-          <option value="Sí, asistiré">Sí, asistiré</option>
+          <option value="Sí, claro">Sí, claro</option>
           <option value="Tal vez">Tal vez</option>
-          <option value="No podré asistir">No podré asistir</option>
+          <option value="No podré">No podré</option>
         </select>
       </div>
       <div class="form-group">
-        <label for="mensaje">¿Quieres dejar un mensaje para Carlota?</label>
+        <label for="mensaje">Mensaje para Carlota:</label>
         <textarea id="mensaje" name="mensaje" rows="3"></textarea>
       </div>
-      <button type="submit">Confirmar asistencia</button>
+      <button type="submit">Enviar Confirmación</button>
     </form>
 
-    <div class="footer">
-      ¡Gracias por formar parte de este momento especial!<br/>
-      <span class="gold">#Carlota87</span>
-    </div>
+    <a id="whatsappLink" class="whatsapp-btn" target="_blank" href="#">
+      Confirmar por WhatsApp
+    </a>
   </div>
+
+  <div class="audio-control">
+    <audio id="bgMusic" autoplay loop controls>
+      <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
+      Tu navegador no soporta el audio.
+    </audio>
+  </div>
+
+  <script>
+    const form = document.getElementById("formularioAsistencia");
+    const whatsappBtn = document.getElementById("whatsappLink");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nombre = document.getElementById("nombre").value.trim();
+      const asistencia = document.getElementById("asistencia").value;
+      const mensaje = document.getElementById("mensaje").value.trim();
+
+      const texto = `Hola, soy ${nombre}. Confirmo: ${asistencia}. Mensaje para Carlota: ${mensaje}`;
+      const whatsappURL = `https://wa.me/5218332451478?text=${encodeURIComponent(texto)}`;
+
+      whatsappBtn.href = whatsappURL;
+      alert("Ahora haz clic en el botón verde para confirmar vía WhatsApp.");
+    });
+  </script>
 
 </body>
 </html>
