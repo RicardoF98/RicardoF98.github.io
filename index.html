@@ -20,6 +20,7 @@
       overflow-x: hidden;
     }
 
+    /* --- CONTENEDOR SOBRE --- */
     .sobre-container {
       height: 100vh;
       display: flex;
@@ -29,6 +30,7 @@
       transition: all 0.6s ease;
     }
 
+    /* --- SOBRE --- */
     .sobre {
       width: 300px;
       height: 200px;
@@ -54,6 +56,7 @@
       z-index: 2;
     }
 
+    /* --- SELLO --- */
     .sello {
       width: 70px;
       height: 70px;
@@ -77,10 +80,23 @@
       content: "Carlota";
     }
 
+    /* --- TEXTO BAJO EL SOBRE --- */
+    .texto-sobre {
+      margin-top: 20px;
+      font-size: 1rem;
+      color: #FFD700;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
+
+    /* --- INVITACIÓN --- */
     .invitacion {
       display: none;
       padding: 40px 20px;
-      max-width: 650px;
+      max-width: 700px;
       margin: 40px auto;
       text-align: center;
       background: rgba(30, 30, 30, 0.95);
@@ -89,6 +105,20 @@
       animation: fadeIn 1.5s ease;
       color: #f0e6c8;
       position: relative;
+    }
+
+    /* --- IMAGEN FIJA --- */
+    .foto-carlota {
+      width: 140px;
+      border-radius: 12px;
+      margin: 20px auto;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+      display: block;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(0,0,0,0.3);
+      padding: 6px;
     }
 
     .invitacion h1 {
@@ -103,15 +133,7 @@
       line-height: 1.7;
     }
 
-    .foto-carlota {
-      width: 140px;
-      border-radius: 12px;
-      margin: 20px auto;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.5);
-      animation: miniImagen 1s ease forwards;
-      animation-delay: 1.5s;
-    }
-
+    /* --- BOTÓN WHATSAPP --- */
     .btn-wsp {
       margin-top: 20px;
       display: inline-block;
@@ -123,10 +145,12 @@
       font-weight: bold;
       font-size: 1rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease, background 0.2s ease;
     }
 
     .btn-wsp:hover {
       background: #1ebe5d;
+      transform: scale(1.05);
     }
 
     @keyframes fadeIn {
@@ -134,31 +158,9 @@
       to {opacity: 1;}
     }
 
-    @keyframes miniImagen {
-      0% { transform: scale(1); position: relative; top: 0; left: 0; }
-      100% {
-        transform: scale(0.4);
-        position: absolute;
-        top: 10px;
-        left: 10px;
-      }
-    }
-
     audio {
       display: none;
     }
-
-.texto-sobre {
-  margin-top: 20px;
-  font-size: 1rem;
-  color: #FFD700;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-  background-color: rgba(0, 0, 0, 0.4);
-  padding: 6px 12px;
-  border-radius: 8px;
-}
-
   </style>
 </head>
 <body>
@@ -169,12 +171,13 @@
     <div class="tapa" id="tapaSobre"></div>
     <div class="sello"></div>
   </div>
-<p class="texto-sobre">Presiona el sobre para abrir la invitación</p>
+  <p class="texto-sobre">Presiona el sobre para abrir la invitación</p>
 </div>
 
 <!-- INVITACIÓN -->
 <div class="invitacion" id="invitacion">
   <img src="assets/carlota.jpg" alt="Carlota" class="foto-carlota">
+
   <h1>Estás invitado/a</h1>
   <p>A la gran celebración del <strong>cumpleaños número 84</strong> de</p>
   <p><strong>Carlota Margarita Pérez Lara</strong></p>
